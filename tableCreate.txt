@@ -1,7 +1,7 @@
 drop table if exists User;
 drop table if exists Person;
 drop table if exists Event;
-drop table if exists Authtoken
+drop table if exists Authtoken;
 
 create table User
 (
@@ -11,7 +11,7 @@ create table User
 	firstName varchar(255) not null,
 	lastName varchar(255) not null,
 	gender varchar(255) not null,
-	personID varchar(255) not null UNIQUE,
+	personID varchar(255) not null UNIQUE
 
 );
 
@@ -24,7 +24,7 @@ create table Person
 	gender varchar(255) not null,
 	fatherID varchar(255),
 	motherID varchar(255),
-	spouseID varchar(255),
+	spouseID varchar(255)
 
 );
 
@@ -37,11 +37,10 @@ create table Event (
 	country varchar(255) not null,
 	city varchar(255) not null,
 	eventType varchar(255) not null,
-	year integer not null,
-
+	year integer not null
 );
 
-creat table Authtoken (
+create table Authtoken (
 	authtoken varchar(255) not null UNIQUE,
 	username varchar(255) not null
 );
