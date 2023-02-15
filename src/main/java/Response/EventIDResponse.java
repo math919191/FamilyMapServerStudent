@@ -1,20 +1,21 @@
-package Model;
+package Response;
 
-public class Event {
+public class EventIDResponse {
 
-    private String eventID;
     private String associatedUsername;
+    private String eventID;
     private String personID;
-    private float latitude;
-    private float longitude;
+    private Float latitude;
+    private Float longitude;
     private String country;
     private String city;
     private String eventType;
     private int year;
+    private boolean success;
 
-    public Event(String eventID, String associatedUsername, String personID, float latitude, float longitude, String country, String city, String eventType, int year) {
-        this.eventID = eventID;
+    public EventIDResponse(String associatedUsername, String eventID, String personID, Float latitude, Float longitude, String country, String city, String eventType, int year, boolean success) {
         this.associatedUsername = associatedUsername;
+        this.eventID = eventID;
         this.personID = personID;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -22,14 +23,7 @@ public class Event {
         this.city = city;
         this.eventType = eventType;
         this.year = year;
-    }
-
-    public String getEventID() {
-        return eventID;
-    }
-
-    public void setEventID(String eventID) {
-        this.eventID = eventID;
+        this.success = success;
     }
 
     public String getAssociatedUsername() {
@@ -40,6 +34,14 @@ public class Event {
         this.associatedUsername = associatedUsername;
     }
 
+    public String getEventID() {
+        return eventID;
+    }
+
+    public void setEventID(String eventID) {
+        this.eventID = eventID;
+    }
+
     public String getPersonID() {
         return personID;
     }
@@ -48,19 +50,19 @@ public class Event {
         this.personID = personID;
     }
 
-    public float getLatitude() {
+    public Float getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(float latitude) {
+    public void setLatitude(Float latitude) {
         this.latitude = latitude;
     }
 
-    public float getLongitude() {
+    public Float getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(float longitude) {
+    public void setLongitude(Float longitude) {
         this.longitude = longitude;
     }
 
@@ -94,5 +96,13 @@ public class Event {
 
     public void setYear(int year) {
         this.year = year;
+    }
+
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
     }
 }

@@ -1,23 +1,20 @@
-package Model;
+package Request;
 
-public class User {
-
+public class UserRegisterRequest {
     private String username;
     private String password;
     private String email;
     private String firstName;
     private String lastName;
     private String gender;
-    private String personID;
 
-    public User(String username, String password, String email, String firstName, String lastName, String gender, String personID) {
+    public UserRegisterRequest(String username, String password, String email, String firstName, String lastName, String gender) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
-        this.personID = personID;
     }
 
     public String getUsername() {
@@ -66,13 +63,5 @@ public class User {
 
     public void setGender(String gender) {
         this.gender = gender;
-    }
-
-    public String getPersonID() {
-        return personID;
-    }
-
-    public void setPersonID(String personID) {
-        this.personID = personID;
     }
 }
