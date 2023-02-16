@@ -15,7 +15,6 @@ public class PersonDao {
         this.conn = conn;
     }
 
-
     /**
      * inserts a person into the database
      * @param person a person
@@ -74,8 +73,6 @@ public class PersonDao {
         }
 
     }
-
-
 
     /**
      * clears the person table

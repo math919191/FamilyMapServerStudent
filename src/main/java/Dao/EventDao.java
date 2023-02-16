@@ -16,8 +16,6 @@ public class EventDao {
         this.conn = conn;
     }
 
-
-
     /**
      * inserts an event into the database
      * @param event an event
