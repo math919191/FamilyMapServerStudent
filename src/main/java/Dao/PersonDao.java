@@ -6,13 +6,13 @@ public class PersonDao {
 
     /**
      * inserts a person into the database
-     * @params Person a person
+     * @param person a person
      * */
     void insertPerson(Person person){}
 
     /**
      * gets a person based on personID
-     * @params username a username
+     * @param personID a personID
      * @return Person a person
      * */
     Person getPerson(String personID){

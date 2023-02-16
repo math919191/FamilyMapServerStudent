@@ -1,6 +1,6 @@
 package Services;
 
-import Response.EventResponse;
+import Response.EventAllResponse;
 
 public class EventAll {
 
@@ -11,7 +11,7 @@ public class EventAll {
      * @return EventResponse
      * */
 
-    EventResponse eventAll(){
+    EventAllResponse eventAll(){
         return null;
     }
 }

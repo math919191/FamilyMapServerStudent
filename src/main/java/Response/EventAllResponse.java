@@ -4,11 +4,11 @@ import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 
-public class EventResponse {
+public class EventAllResponse {
     private ArrayList<JsonObject> data;
     private boolean success;
 
-    public EventResponse(ArrayList<JsonObject> data, boolean success) {
+    public EventAllResponse(ArrayList<JsonObject> data, boolean success) {
         this.data = data;
         this.success = success;
     }

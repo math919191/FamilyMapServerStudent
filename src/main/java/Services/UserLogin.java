@@ -14,7 +14,7 @@ public class UserLogin {
 /**
  * logs user in and returns an authtoken
  *
- * @params userLoginRequest a userLoginRequest
+ * @param userLoginRequest a userLoginRequest
  * @return userLoginResponse a userLoginResponse
 */
 

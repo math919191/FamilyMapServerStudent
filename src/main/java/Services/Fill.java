@@ -11,8 +11,8 @@ public class Fill {
      * The optional "generations" parameter lets the caller specify the number of generations of ancestors to be generated,
      * and must be a non-negative integer (the default is 4, which results in 31 new persons each with associated events).
      *
-     * @params username a username
-     * @params generations number of generations (optional, default=4)
+     * @param username a username
+     * @param generations number of generations (optional, default=4)
      *
      * @return FillResponse
      * */

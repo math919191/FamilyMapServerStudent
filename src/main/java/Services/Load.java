@@ -9,7 +9,7 @@ public class Load {
      * Clears all data from the database (just like the /clear API)
      * Loads the user, person, and event data from the request body into the database.
      *
-     * @params loadRequest a loadRequest
+     * @param loadRequest a loadRequest
      * @return LoadResponse a loadResponse
      * */
 
