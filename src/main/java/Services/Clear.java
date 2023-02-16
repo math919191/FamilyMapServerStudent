@@ -1,6 +1,9 @@
 package Services;
 
+import Dao.EventDao;
 import Response.ClearResponse;
+
+import java.sql.Connection;
 
 public class Clear {
 
@@ -12,7 +15,15 @@ public class Clear {
      * @return ClearResponse response to clear
      * */
     ClearResponse clear(){
+        /* would call
+        eventDao.clear()
+        userDao.clear()
+        authTokenDao.clear()
+        personDao.clear()
+        */
+
         return null;
+
     }
 
 }

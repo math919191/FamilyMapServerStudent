@@ -13,6 +13,14 @@ public class PersonID {
 
 
     PersonIDResponse personIDResponse(String personID){
+        //get the person with the id
+            //calls personDao.findPerson(personID)
+        //get the username of the person by using the authtoken
+            //calls authTokenDao.findUsername(authtoken)
+        //verify the usernames match
+            // person.getUsername() = authToken.getUserName()
+        //create a response and send it back
+
         return null;
     }
 }

@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -97,6 +98,25 @@ class EventDaoTest {
     void findEventFail() throws DataAccessException {
         Event compareTest = eDao.findEvent("fakeEventID");
         assertNull(compareTest);
+    }
+
+    @Test
+    void findAllEventsPass() throws DataAccessException {
+        eDao.insertEvent(bestEvent);
+        eDao.insertEvent(worstEvent);
+
+        //creates an equivalent arrayList by maintaining same order.
+        ArrayList<Event> events = new ArrayList<>();
+        events.add(bestEvent);
+        events.add(worstEvent);
+
+        ArrayList<Event> compareTest = eDao.findAllEvents();
+
+        //verify same number of items
+        assertEquals(2, compareTest.size());
+        assertEquals(events, compareTest);
+
+
     }
 
     @Test

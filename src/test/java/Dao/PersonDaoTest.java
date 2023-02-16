@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,15 +14,19 @@ class PersonDaoTest {
     private Database db;
     private Person person1;
     private Person person2;
+    private Person person3;
+
     private PersonDao pDao;
 
     @BeforeEach
     public void setUp() throws DataAccessException {
         db = new Database();
-        person1 = new Person("person1ID", "user", "jonny",
+        person1 = new Person("person1ID", "user1", "jonny",
                 "Cache", "M", "fatherID", "motherID", "spouseID");
-        person2 = new Person("person2ID", "user", "King of ",
+        person2 = new Person("person2ID", "user2", "King of ",
                 "Rock", "M", "fatherID", "motherID", "spouseID");
+        person3 = new Person("person3ID", "user1", "Queen of ",
+                "Everything", "F", "fatherID", "motherID", "spouseID");
 
         Connection conn = db.getConnection();
         pDao = new PersonDao(conn);
@@ -67,6 +72,26 @@ class PersonDaoTest {
         assertNull(compareTest);
     }
 
+
+    @Test
+    void findPeoplePass() throws DataAccessException {
+
+        pDao.insertPerson(person1);
+        pDao.insertPerson(person2);
+
+        ArrayList<Person> compareTest = pDao.findPeople(person1.getAssociatedUsername());
+        ArrayList<Person> people = new ArrayList<>();
+        people.add(person1);
+
+        assertEquals(people, compareTest);
+
+        pDao.insertPerson(person3);
+        compareTest = pDao.findPeople(person1.getAssociatedUsername());
+        people.add(person3);
+
+        assertEquals(people, compareTest);
+
+    }
     @Test
     void clear() throws DataAccessException {
         pDao.clear();

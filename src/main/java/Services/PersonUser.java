@@ -14,6 +14,12 @@ public class PersonUser {
 
 
     PersonUserResponse personUser(){
+        //get username from authtoken
+            // username = authtokenDao.getUsername(authtoken)
+        //get all the people with the associated username
+            // allThePeople = personDao.getAllFamilyMembers(username)
+        //convert allThePeople into a PersonUserResponse
+        // return the response
         return null;
     }
 

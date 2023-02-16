@@ -12,6 +12,7 @@ public class EventAll {
      * */
 
     EventAllResponse eventAll(){
+        //would call eventDao.findAllEvents();
         return null;
     }
 }
