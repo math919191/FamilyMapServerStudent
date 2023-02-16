@@ -69,6 +69,30 @@ class UserDaoTest {
     }
 
     @Test
+    void deleteUserPass() throws DataAccessException {
+        uDao.insertUser(user1);
+        uDao.insertUser(user2);
+
+        //make sure that it was inserted correctly
+        User compareTest = uDao.findUser(user1.getPersonID());
+        assertEquals(user1, compareTest);
+
+        uDao.deleteUser(user1.getUsername());
+
+        compareTest = uDao.findUser(user1.getPersonID());
+        assertNull(compareTest);
+    }
+
+    @Test
+    void deleteUserFail() throws DataAccessException {
+        uDao.insertUser(user1);
+
+        assertEquals(0, uDao.deleteUser(user2.getUsername()));
+
+    }
+
+
+    @Test
     void clear() throws DataAccessException {
         uDao.clear();
         User compareTest = uDao.findUser("fakeUserID");

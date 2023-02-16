@@ -65,8 +65,27 @@ public class AuthtokenDao {
      * @param authToken a authtoken
      * @return AuthToken an authtoken that contains a username
      * */
-    AuthToken findUserName(String authToken){
-        return null;
+    AuthToken findUserName(String authToken) throws DataAccessException {
+        AuthToken myAuthToken;
+        ResultSet rs;
+        String sql = "SELECT * FROM Authtokens WHERE authtoken = ?;";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)){
+            stmt.setString(1, authToken);
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                myAuthToken = new AuthToken(
+                        rs.getString("authToken"),
+                        rs.getString("username")
+                );
+                return myAuthToken;
+            } else {
+                return null;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DataAccessException("error while finding authtoken from username");
+        }
     }
 
     /**

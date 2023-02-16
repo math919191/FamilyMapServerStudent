@@ -13,7 +13,6 @@ class AuthtokenDaoTest {
 
         private Database db;
         private AuthToken authtoken1;
-        private AuthToken Authtoken2;
         private AuthtokenDao authDao;
 
         @BeforeEach
@@ -54,6 +53,19 @@ class AuthtokenDaoTest {
         @Test
         void findAuthtokenFail() throws DataAccessException {
             AuthToken compareTest = authDao.findAuthToken("fakeAuthtokenID");
+            assertNull(compareTest);
+        }
+
+        @Test
+        void findUserNamePass() throws DataAccessException {
+            authDao.insertAuthToken(authtoken1);
+            AuthToken compareTest = authDao.findUserName(authtoken1.getAuthtoken());
+            assertEquals(authtoken1, compareTest);
+        }
+
+        @Test
+        void findUserNameFail() throws DataAccessException {
+            AuthToken compareTest = authDao.findUserName("fakeusername");
             assertNull(compareTest);
         }
 
