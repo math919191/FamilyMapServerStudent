@@ -1,6 +1,6 @@
 package Services;
 
-import Dao.EventDao;
+import Dao.*;
 import Response.ClearResponse;
 
 import java.sql.Connection;
@@ -15,14 +15,33 @@ public class Clear {
      * @return ClearResponse response to clear
      * */
     ClearResponse clear(){
-        /* would call
-        eventDao.clear()
-        userDao.clear()
-        authTokenDao.clear()
-        personDao.clear()
-        */
+        Database db = new Database();
+        try {
+            db.openConnection();
 
-        return null;
+            clearGivenConnection(db.getConnection());
+            db.closeConnection(true);
+
+            ClearResponse result = new ClearResponse("Clear Succeeded", true);
+
+            return result;
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            db.closeConnection(false);
+
+            ClearResponse result = new ClearResponse("Clear Failed", false);
+
+            return result;
+
+        }
+    }
+
+    public void clearGivenConnection(Connection connection) throws DataAccessException {
+        new EventDao(connection).clear();
+        new UserDao(connection).clear();
+        new AuthtokenDao(connection).clear();
+        new PersonDao(connection).clear();
 
     }
 

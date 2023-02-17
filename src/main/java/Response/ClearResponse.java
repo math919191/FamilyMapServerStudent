@@ -6,7 +6,7 @@ public class ClearResponse {
     private boolean success;
 
     public ClearResponse(String message, boolean success) {
-        this.message = "Clear Succeeded";
+        this.message = message;
         this.success = success;
     }
 

@@ -18,6 +18,8 @@ public class Fill {
      * */
 
     FillResponse fill(String username, int generations){
+        //verify the username is registered
+        //generate
         return null;
     }
 }

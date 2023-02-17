@@ -14,6 +14,7 @@ public class EventID {
 
     EventIDResponse eventID(String eventID){
         //would call eventDao.findEvent(eventID)
+        //would convert response to EventIDResponse
         return null;
     }
 }

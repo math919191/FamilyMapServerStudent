@@ -14,6 +14,11 @@ public class Load {
      * */
 
     LoadResponse load(LoadRequest loadRequest){
+        //calls clear service
+        //loops through persons and adds them to the database
+        //loops through users and adds them to the database
+        //loops through events and adds them to the database
+        //creates a LoadResponse object and returns
         return null;
     }
 }

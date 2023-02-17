@@ -13,6 +13,8 @@ public class EventAll {
 
     EventAllResponse eventAll(){
         //would call eventDao.findAllEvents();
+        //would convert to EventAllResponse and return that
+
         return null;
     }
 }
