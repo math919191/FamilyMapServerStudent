@@ -2,7 +2,7 @@ package Services;
 
 import Response.EventIDResponse;
 
-public class EventID {
+public class EventIDService {
 
     /**
      * Returns the single Event object with the specified ID (if the event is associated with the current user).

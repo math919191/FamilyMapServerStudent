@@ -2,7 +2,7 @@ package Services;
 
 import Response.EventAllResponse;
 
-public class EventAll {
+public class EventAllService {
 
     /**
      * Returns ALL events for ALL family members of the current user.

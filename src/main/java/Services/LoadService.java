@@ -3,7 +3,7 @@ package Services;
 import Request.LoadRequest;
 import Response.LoadResponse;
 
-public class Load {
+public class LoadService {
 
     /**
      * Clears all data from the database (just like the /clear API)

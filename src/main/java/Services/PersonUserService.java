@@ -2,7 +2,7 @@ package Services;
 
 import Response.PersonUserResponse;
 
-public class PersonUser {
+public class PersonUserService {
 
     /**
      * Returns ALL family members of the current user.

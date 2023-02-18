@@ -3,7 +3,7 @@ package Services;
 import Request.UserRegisterRequest;
 import Response.UserRegisterResponse;
 
-public class UserRegister {
+public class UserRegisterService {
 
 /*  From spec
     URL Path: /user/register

@@ -1,9 +1,8 @@
 package Services;
 
-import Response.ClearResponse;
 import Response.FillResponse;
 
-public class Fill {
+public class FillService {
 
     /**
      * Populates the server's database with generated data for the specified username. The required "username" parameter must be a user already registered with the server.

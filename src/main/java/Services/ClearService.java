@@ -5,7 +5,7 @@ import Response.ClearResponse;
 
 import java.sql.Connection;
 
-public class Clear {
+public class ClearService {
 
 //spec    Deletes ALL data from the database, including user, authtoken, person, and event data
 
@@ -14,7 +14,7 @@ public class Clear {
      *
      * @return ClearResponse response to clear
      * */
-    ClearResponse clear(){
+    public ClearResponse clear(){
         Database db = new Database();
         try {
             db.openConnection();
@@ -37,7 +37,7 @@ public class Clear {
         }
     }
 
-    public void clearGivenConnection(Connection connection) throws DataAccessException {
+    private void clearGivenConnection(Connection connection) throws DataAccessException {
         new EventDao(connection).clear();
         new UserDao(connection).clear();
         new AuthtokenDao(connection).clear();

@@ -3,7 +3,7 @@ package Services;
 import Request.UserLoginRequest;
 import Response.UserLoginResponse;
 
-public class UserLogin {
+public class UserLoginService {
 
 /*
     from spec

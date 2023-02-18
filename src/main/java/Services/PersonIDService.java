@@ -2,7 +2,7 @@ package Services;
 
 import Response.PersonIDResponse;
 
-public class PersonID {
+public class PersonIDService {
     /**
      * Returns the single Person object with the specified ID (if the person is associated with the current user).
      * The current user is determined by the provided authtoken.
