@@ -2,19 +2,20 @@ package Services;
 
 import Dao.*;
 import Response.ClearResponse;
+import Response.Response;
+import Response.ErrorResponse;
+
 
 import java.sql.Connection;
 
 public class ClearService {
-
-//spec    Deletes ALL data from the database, including user, authtoken, person, and event data
 
     /**
      * Deletes ALL data from the database
      *
      * @return ClearResponse response to clear
      * */
-    public ClearResponse clear(){
+    public Response clear(){
         Database db = new Database();
         try {
             db.openConnection();
@@ -29,9 +30,7 @@ public class ClearService {
         } catch (Exception ex) {
             ex.printStackTrace();
             db.closeConnection(false);
-
-            ClearResponse result = new ClearResponse("Clear Failed", false);
-
+            ErrorResponse result = new ErrorResponse("Clear Failed", false);
             return result;
 
         }

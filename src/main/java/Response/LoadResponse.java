@@ -1,9 +1,6 @@
 package Response;
 
-public class LoadResponse {
-    private String message;
-    private boolean success;
-
+public class LoadResponse extends Response {
 
     public LoadResponse(String message, boolean success) {
         this.message = message;

@@ -1,6 +1,6 @@
 package Response;
 
-public class PersonIDResponse {
+public class PersonIDResponse extends Response {
 
     private String associatedUsername;
     private String personID;

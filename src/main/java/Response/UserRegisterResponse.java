@@ -1,10 +1,9 @@
 package Response;
 
-public class UserRegisterResponse {
+public class UserRegisterResponse extends Response {
     private String authToken;
     private String username;
     private String personID;
-    private boolean success;
 
     public UserRegisterResponse(String authToken, String username, String personID, boolean success) {
         this.authToken = authToken;

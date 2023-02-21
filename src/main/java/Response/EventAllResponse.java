@@ -4,9 +4,8 @@ import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 
-public class EventAllResponse {
+public class EventAllResponse extends Response {
     private ArrayList<JsonObject> data;
-    private boolean success;
 
     public EventAllResponse(ArrayList<JsonObject> data, boolean success) {
         this.data = data;

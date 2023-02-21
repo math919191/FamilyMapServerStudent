@@ -1,10 +1,9 @@
 package Response;
 
-public class UserLoginResponse {
+public class UserLoginResponse extends Response {
     private String authToken;
     private String username;
     private String personID;
-    private boolean success;
 
     public UserLoginResponse(String authToken, String username, String personID, boolean success) {
         this.authToken = authToken;

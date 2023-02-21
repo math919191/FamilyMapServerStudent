@@ -1,9 +1,7 @@
 package Response;
 
-public class FillResponse {
+public class FillResponse extends Response {
 
-    private String message;
-    private boolean success;
 
     public FillResponse(String message, boolean success) {
         this.message = message;

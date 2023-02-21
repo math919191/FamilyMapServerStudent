@@ -1,8 +1,6 @@
 package Response;
 
-public class ErrorResponse {
-    private String message;
-    private boolean success;
+public class ErrorResponse extends Response {
 
     public ErrorResponse(String message, boolean success) {
         this.message = "Error: " + message;

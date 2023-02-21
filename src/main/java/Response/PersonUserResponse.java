@@ -4,10 +4,9 @@ import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 
-public class PersonUserResponse {
+public class PersonUserResponse extends Response {
 
     private ArrayList<JsonObject> data;
-    private boolean success;
 
     public PersonUserResponse(ArrayList<JsonObject> data, boolean success) {
         this.data = data;

@@ -1,6 +1,6 @@
 package Response;
 
-public class EventIDResponse {
+public class EventIDResponse extends Response {
 
     private String associatedUsername;
     private String eventID;
@@ -11,7 +11,6 @@ public class EventIDResponse {
     private String city;
     private String eventType;
     private int year;
-    private boolean success;
 
     public EventIDResponse(String associatedUsername, String eventID, String personID, Float latitude, Float longitude, String country, String city, String eventType, int year, boolean success) {
         this.associatedUsername = associatedUsername;

@@ -1,6 +1,8 @@
 package Handler;
 
 import Response.ClearResponse;
+import Response.Response;
+
 import Services.ClearService;
 import com.google.gson.Gson;
 import com.sun.net.httpserver.Headers;
@@ -24,21 +26,18 @@ public class ClearHandler implements HttpHandler {
         Gson gson = new Gson();
         try {
             if (exchange.getRequestMethod().toLowerCase().equals("post")) {
-                Headers reqHeaders = exchange.getRequestHeaders();
-                /** if (reqHeaders.containsKey("Authorization")){
-                    String authToken = reqHeaders.getFirst("Authorization");
-                    if (authToken.equals("a real token"))
-                }
-                */
 
                 ClearService service = new ClearService();
-                ClearResponse result = service.clear();
+                Response result = service.clear();
+
+                String respData = gson.toJson(result).toString();
+
 
                 exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
-                OutputStream resBody = exchange.getResponseBody();
-                //TODO double check the correctness of next line
-                resBody.write(gson.toJson(result).getBytes());
-                resBody.close();
+                OutputStream respBody = exchange.getResponseBody();
+
+                writeString(respData, respBody);
+                respBody.close();
 
                 success = true;
 
