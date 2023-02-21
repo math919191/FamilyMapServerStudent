@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.*;
 
 import Handler.*;
+import Model.Data.LoadData;
 import com.sun.net.httpserver.*;
 
 public class Server {
@@ -23,6 +24,10 @@ public class Server {
             return;
         }
         server.setExecutor(null);
+
+        System.out.println("Loading Data");
+
+
         System.out.println("Creating contexts");
         server.createContext("/user/register", new UserRegisterHandler());
         server.createContext("/user/login", new UserLoginHandler());
