@@ -19,7 +19,7 @@ public class UserDao {
      * inserts a user into the database
      * @param user a user
      * */
-    void insertUser(User user) throws DataAccessException {
+    public void insertUser(User user) throws DataAccessException {
         String sql = "INSERT INTO Users (username, password, email, firstName, " +
                 "lastName, gender, personID) Values(?,?,?,?,?,?,?)";
 
