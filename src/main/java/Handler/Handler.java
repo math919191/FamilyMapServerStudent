@@ -1,10 +1,14 @@
 package Handler;
 
+import Response.Response;
+import Response.ErrorResponse;
+
 import Services.ValidateAuthtokenService;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
 import java.io.*;
+import java.net.HttpURLConnection;
 
 public class Handler implements HttpHandler {
 
@@ -30,6 +34,18 @@ public class Handler implements HttpHandler {
 
     public boolean isAuthTokenValid(String authToken) {
         return new ValidateAuthtokenService().validateAuthToken(authToken);
+    }
+
+    public int getHTTPResponseVal(Response result){
+        int responseVal;
+        if (result instanceof ErrorResponse){
+            responseVal = HttpURLConnection.HTTP_BAD_REQUEST;
+        } else {
+            responseVal = HttpURLConnection.HTTP_OK;
+        }
+        return responseVal;
+
+
     }
 
 

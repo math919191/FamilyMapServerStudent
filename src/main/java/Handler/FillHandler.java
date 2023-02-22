@@ -39,7 +39,9 @@ public class FillHandler extends Handler {
                 String respData = gson.toJson(result).toString();
 
 
-                exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+                int responseVal = getHTTPResponseVal(result);
+                exchange.sendResponseHeaders(responseVal, 0);
+
                 OutputStream respBody = exchange.getResponseBody();
 
                 writeString(respData, respBody);

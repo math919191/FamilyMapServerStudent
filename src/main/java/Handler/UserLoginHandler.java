@@ -3,6 +3,8 @@ package Handler;
 import Request.UserLoginRequest;
 import Request.UserRegisterRequest;
 import Response.Response;
+import Response.ErrorResponse;
+
 import Services.FillService;
 import Services.UserLoginService;
 import com.google.gson.Gson;
@@ -30,8 +32,9 @@ public class UserLoginHandler extends Handler {
 
                 String respData = gson.toJson(result).toString();
 
+                int responseVal = getHTTPResponseVal(result);
+                exchange.sendResponseHeaders(responseVal, 0);
 
-                exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
                 OutputStream respBody = exchange.getResponseBody();
 
                 writeString(respData, respBody);

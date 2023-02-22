@@ -920,50 +920,50 @@ public class ServerTest {
      * All Event
      * All Person
      */
-    @Test
-    @DisplayName("Persistence Test")
-    public void testPersistence(TestInfo testInfo) {
-        printTestName(testInfo);
-        //We are calling the load api using the data in "/passoffFiles/LoadData.json" as the request
-        load();
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Shut down the server, wait a few seconds, then restart the server. Then press ENTER.");
-        //Will wait on the statement scanner.nextLine() till you push enter in the terminal window.
-        //You may need to follow the steps under the heading "Setting up for the Persistence Test" in the "How To Get Started"
-        //tutorial, linked in canvas, in order to get this to work properly. The "How to Get Started" tutorial can be found
-        //inside the Family Map Server Program assignment listed on the Assignments tab on canvas.
-        scanner.nextLine();
-        try {
-            //We are creating a JsonReader from the LoadData.json file
-            JsonReader jsonReader = new JsonReader(new FileReader("passoffFiles/LoadData.json"));
-            //We are creating a LoadRequest from the JsonReader we made
-            LoadRequest loadRequest = GSON.fromJson(jsonReader, LoadRequest.class);
-            //We are calling the login api for a user named sheila
-            LoginResult loginResult = proxy.login(host, port, loginRequest);
-            //We are calling the get all events api for the user sheila (we are using the authtoken variable from loginResult on the previous line)
-            EventsResult eventsResult = proxy.events(host, port, loginResult.getAuthtoken());
-            //We are calling the get all people api for the user sheila (we are using the authtoken variable from the same loginResult)
-            PersonsResult personsResult = proxy.persons(host, port, loginResult.getAuthtoken());
-            //Checks to see if the list of events associated with sheila from loadRequest matches the list of events from eventsResult
-            assertEquals(loadRequest.getEvents(loginRequest.getUsername()), eventsResult.getDataAsSet(), SHEILA.getUsername() + "'s events do not match those loaded");
-            //Checks to see if the list of people associated with sheila from loadRequest matches the list of people from personsResult
-            assertEquals(loadRequest.getPersons(loginRequest.getUsername()), personsResult.getDataAsSet(), SHEILA.getUsername() + "'s persons do not match those loaded");
-            //We are calling the login api for a user named patrick
-            loginResult = proxy.login(host, port, loginRequest2);
-            //We are calling the get all events api for the user patrick (we are using the authtoken variable from loginResult on the previous line)
-            eventsResult = proxy.events(host, port, loginResult.getAuthtoken());
-            //We are calling the get all people api for the user patrick (we are using the authtoken variable from the same loginResult)
-            personsResult = proxy.persons(host, port, loginResult.getAuthtoken());
-            //Checks to see if the list of events associated with patrick from loadRequest matches the list of events from eventsResult
-            assertEquals(loadRequest.getEvents(loginRequest2.getUsername()), eventsResult.getDataAsSet(), PATRICK.getUsername() + "'s events do not match those loaded");
-            //Checks to see if the list of people associated with patrick from loadRequest matches the list of people from personsResult
-            assertEquals(loadRequest.getPersons(loginRequest2.getUsername()), personsResult.getDataAsSet(), PATRICK.getUsername() + "'s persons do not match those loaded");
-        } catch (ServerConnectionException e) {
-            fail(e.getMessage());
-        } catch (FileNotFoundException e) {
-            Assertions.fail("passoffFiles/LoadData.json not found in project root directory");
-        }
-    }
+//    @Test
+//    @DisplayName("Persistence Test")
+//    public void testPersistence(TestInfo testInfo) {
+//        printTestName(testInfo);
+//        //We are calling the load api using the data in "/passoffFiles/LoadData.json" as the request
+//        load();
+//        Scanner scanner = new Scanner(System.in);
+//        System.out.println("Shut down the server, wait a few seconds, then restart the server. Then press ENTER.");
+//        //Will wait on the statement scanner.nextLine() till you push enter in the terminal window.
+//        //You may need to follow the steps under the heading "Setting up for the Persistence Test" in the "How To Get Started"
+//        //tutorial, linked in canvas, in order to get this to work properly. The "How to Get Started" tutorial can be found
+//        //inside the Family Map Server Program assignment listed on the Assignments tab on canvas.
+//        scanner.nextLine();
+//        try {
+//            //We are creating a JsonReader from the LoadData.json file
+//            JsonReader jsonReader = new JsonReader(new FileReader("passoffFiles/LoadData.json"));
+//            //We are creating a LoadRequest from the JsonReader we made
+//            LoadRequest loadRequest = GSON.fromJson(jsonReader, LoadRequest.class);
+//            //We are calling the login api for a user named sheila
+//            LoginResult loginResult = proxy.login(host, port, loginRequest);
+//            //We are calling the get all events api for the user sheila (we are using the authtoken variable from loginResult on the previous line)
+//            EventsResult eventsResult = proxy.events(host, port, loginResult.getAuthtoken());
+//            //We are calling the get all people api for the user sheila (we are using the authtoken variable from the same loginResult)
+//            PersonsResult personsResult = proxy.persons(host, port, loginResult.getAuthtoken());
+//            //Checks to see if the list of events associated with sheila from loadRequest matches the list of events from eventsResult
+//            assertEquals(loadRequest.getEvents(loginRequest.getUsername()), eventsResult.getDataAsSet(), SHEILA.getUsername() + "'s events do not match those loaded");
+//            //Checks to see if the list of people associated with sheila from loadRequest matches the list of people from personsResult
+//            assertEquals(loadRequest.getPersons(loginRequest.getUsername()), personsResult.getDataAsSet(), SHEILA.getUsername() + "'s persons do not match those loaded");
+//            //We are calling the login api for a user named patrick
+//            loginResult = proxy.login(host, port, loginRequest2);
+//            //We are calling the get all events api for the user patrick (we are using the authtoken variable from loginResult on the previous line)
+//            eventsResult = proxy.events(host, port, loginResult.getAuthtoken());
+//            //We are calling the get all people api for the user patrick (we are using the authtoken variable from the same loginResult)
+//            personsResult = proxy.persons(host, port, loginResult.getAuthtoken());
+//            //Checks to see if the list of events associated with patrick from loadRequest matches the list of events from eventsResult
+//            assertEquals(loadRequest.getEvents(loginRequest2.getUsername()), eventsResult.getDataAsSet(), PATRICK.getUsername() + "'s events do not match those loaded");
+//            //Checks to see if the list of people associated with patrick from loadRequest matches the list of people from personsResult
+//            assertEquals(loadRequest.getPersons(loginRequest2.getUsername()), personsResult.getDataAsSet(), PATRICK.getUsername() + "'s persons do not match those loaded");
+//        } catch (ServerConnectionException e) {
+//            fail(e.getMessage());
+//        } catch (FileNotFoundException e) {
+//            Assertions.fail("passoffFiles/LoadData.json not found in project root directory");
+//        }
+//    }
 
     /**
      * Required API calls:

@@ -30,16 +30,20 @@ public class LoadService {
             new ClearService().clearGivenConnection(db.getConnection());
 
             //loops through persons and adds them to the database
-            addPersonsToDatabase(loadRequest.getPersons(), db.getConnection());
-            int numPersonsAdded = loadRequest.getPersons().size();
+            ArrayList<Person> persons = loadRequest.getPersons();
+            addPersonsToDatabase(persons, db.getConnection());
+            int numPersonsAdded = (persons == null) ? 0 : persons.size();
+
 
             //loops through users and adds them to the database
-            addUsersToDatabase(loadRequest.getUsers(), db.getConnection());
-            int numUsersAdded = loadRequest.getUsers().size();
+            ArrayList<User> users = loadRequest.getUsers();
+            addUsersToDatabase(users, db.getConnection());
+            int numUsersAdded = (users == null) ? 0 : users.size();
 
             //loops through events and adds them to the database
-            addEventsToDatabase(loadRequest.getEvents(), db.getConnection());
-            int numEventsAdded = loadRequest.getEvents().size();
+            ArrayList<Event> events = loadRequest.getEvents();
+            addEventsToDatabase(events, db.getConnection());
+            int numEventsAdded = (events == null) ? 0 : events.size();
 
 
             db.closeConnection(true);
@@ -59,24 +63,32 @@ public class LoadService {
     }
 
     private void addEventsToDatabase(ArrayList<Event> events, Connection connection) throws DataAccessException {
+        if (events != null){
 
-        EventDao eventDao = new EventDao(connection);
-        for (Event e : events){
-            eventDao.insertEvent(e);
+            EventDao eventDao = new EventDao(connection);
+            for (Event e : events){
+                eventDao.insertEvent(e);
+            }
         }
     }
 
     private void addUsersToDatabase(ArrayList<User> users, Connection connection) throws DataAccessException {
-        UserDao userDao = new UserDao(connection);
-        for (User u : users){
-            userDao.insertUser(u);
+        if (users != null){
+
+            UserDao userDao = new UserDao(connection);
+            for (User u : users){
+                userDao.insertUser(u);
+            }
         }
     }
 
     private void addPersonsToDatabase(ArrayList<Person> persons, Connection connection) throws DataAccessException {
-        PersonDao personDao = new PersonDao(connection);
-        for (Person p : persons){
-            personDao.insertPerson(p);
+        if (persons != null){
+            PersonDao personDao = new PersonDao(connection);
+            for (Person p : persons){
+                personDao.insertPerson(p);
+            }
+
         }
     }
 

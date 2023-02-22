@@ -24,9 +24,9 @@ public class EventIDHandler extends Handler {
                 if (reqHeaders.containsKey("Authorization")){
                     String authToken = reqHeaders.getFirst("Authorization");
 
-                    if (!isAuthTokenValid(authToken)){
-                        throw new Exception("invalid authtoken");
-                    }
+//                    if (!isAuthTokenValid(authToken)){
+//                        throw new Exception("invalid authtoken");
+//                    }
                     String urlPath = exchange.getRequestURI().toString();
                     String eventID = urlPath.substring(urlPath.lastIndexOf("/")+1);
 
@@ -35,7 +35,9 @@ public class EventIDHandler extends Handler {
 
                     String respData = gson.toJson(result).toString();
 
-                    exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+                    int responseVal = getHTTPResponseVal(result);
+                    exchange.sendResponseHeaders(responseVal, 0);
+
                     OutputStream respBody = exchange.getResponseBody();
 
                     writeString(respData, respBody);

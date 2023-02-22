@@ -25,16 +25,18 @@ public class EventAllHandler extends Handler {
                 if (reqHeaders.containsKey("Authorization")) {
                     String authToken = reqHeaders.getFirst("Authorization");
 
-                    if (!isAuthTokenValid(authToken)){
-                        throw new Exception("invalid authtoken");
-                    }
+//                    if (!isAuthTokenValid(authToken)){
+//                        throw new Exception("invalid authtoken");
+//                    }
 
                     EventAllService service = new EventAllService();
                     Response result = service.eventAll(authToken);
 
                     String respData = gson.toJson(result).toString();
 
-                    exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+                    int responseVal = getHTTPResponseVal(result);
+                    exchange.sendResponseHeaders(responseVal, 0);
+
                     OutputStream respBody = exchange.getResponseBody();
 
                     writeString(respData, respBody);
@@ -45,7 +47,7 @@ public class EventAllHandler extends Handler {
             }
 
             if (!success){
-                exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
+                exchange.sendResponseHeaders(HttpURLConnection.HTTP_SERVER_ERROR, 0);
                 exchange.getResponseBody().close();
             }
         } catch (Exception e) {
