@@ -18,7 +18,7 @@ public class AuthtokenDao {
      * inserts an authToken into the database
      * @param authtoken an authtoken
      * */
-    void insertAuthToken(AuthToken authtoken) throws DataAccessException {
+    public void insertAuthToken(AuthToken authtoken) throws DataAccessException {
         String sql = "INSERT INTO Authtokens (authtoken, username) VALUES(?,?)";
 
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
