@@ -1,23 +1,25 @@
 package Response;
 
+import Model.Person;
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 
 public class PersonUserResponse extends Response {
 
-    private ArrayList<JsonObject> data;
+    private ArrayList<Person> data;
 
-    public PersonUserResponse(ArrayList<JsonObject> data, boolean success) {
+    public PersonUserResponse(ArrayList<Person> data, boolean success) {
         this.data = data;
         this.success = success;
+        this.message = "person user response message";
     }
 
-    public ArrayList<JsonObject> getData() {
+    public ArrayList<Person> getData() {
         return data;
     }
 
-    public void setData(ArrayList<JsonObject> data) {
+    public void setData(ArrayList<Person> data) {
         this.data = data;
     }
 

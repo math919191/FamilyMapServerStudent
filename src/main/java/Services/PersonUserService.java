@@ -1,6 +1,15 @@
 package Services;
 
+import Dao.AuthtokenDao;
+import Dao.Database;
+import Dao.PersonDao;
+import Model.AuthToken;
+import Model.Person;
 import Response.PersonUserResponse;
+import Response.ErrorResponse;
+import Response.Response;
+
+import java.util.ArrayList;
 
 public class PersonUserService {
 
@@ -13,14 +22,38 @@ public class PersonUserService {
      * */
 
 
-    PersonUserResponse personUser(){
-        //get username from authtoken
-            // username = authtokenDao.getUsername(authtoken)
-        //get all the people with the associated username
-            // allThePeople = personDao.getAllFamilyMembers(username)
-        //convert allThePeople into a PersonUserResponse
-        // return the response
-        return null;
+    public Response personUser(String authToken){
+
+
+        Database db = new Database();
+        try {
+            db.openConnection();
+
+            //get username from authtoken
+            //get the username of the person by using the authtoken
+            AuthtokenDao authtokenDao = new AuthtokenDao(db.getConnection());
+            AuthToken authToken1 = authtokenDao.findUserName(authToken);
+            String username = authToken1.getUsername();
+
+
+            //get all the people with the associated username
+            PersonDao personDao = new PersonDao(db.getConnection());
+            ArrayList<Person> persons = personDao.findPersons(username);
+
+            db.closeConnection(false);
+
+            //create a response and send it back
+            PersonUserResponse response = new PersonUserResponse(persons, true);
+
+            return response;
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            db.closeConnection(false);
+            ErrorResponse result = new ErrorResponse("Person User service failed", false);
+            return result;
+
+        }
     }
 
 }

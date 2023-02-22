@@ -79,14 +79,14 @@ class PersonDaoTest {
         pDao.insertPerson(person1);
         pDao.insertPerson(person2);
 
-        ArrayList<Person> compareTest = pDao.findPeople(person1.getAssociatedUsername());
+        ArrayList<Person> compareTest = pDao.findPersons(person1.getAssociatedUsername());
         ArrayList<Person> people = new ArrayList<>();
         people.add(person1);
 
         assertEquals(people, compareTest);
 
         pDao.insertPerson(person3);
-        compareTest = pDao.findPeople(person1.getAssociatedUsername());
+        compareTest = pDao.findPersons(person1.getAssociatedUsername());
         people.add(person3);
 
         assertEquals(people, compareTest);

@@ -1,6 +1,5 @@
 package Dao;
 
-import Model.Event;
 import Model.Person;
 
 import java.sql.Connection;
@@ -80,7 +79,7 @@ public class PersonDao {
      * @param associatedUsername associatedUsername
      * @return people list of family members
      * */
-    ArrayList<Person> findPeople(String associatedUsername) throws DataAccessException {
+    public ArrayList<Person> findPersons(String associatedUsername) throws DataAccessException {
         ArrayList<Person> people = new ArrayList<>();
         ResultSet rs;
         String sql = "SELECT * FROM Persons WHERE associatedUsername = ?;";
