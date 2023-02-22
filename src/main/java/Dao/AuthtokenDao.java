@@ -37,7 +37,7 @@ public class AuthtokenDao {
      * @param username a username
      * @return AuthToken an authtoken
      * */
-    AuthToken findAuthToken(String username) throws DataAccessException {
+    public AuthToken findAuthToken(String username) throws DataAccessException {
         AuthToken authToken;
         ResultSet rs;
         String sql = "SELECT * FROM Authtokens WHERE username = ?;";
