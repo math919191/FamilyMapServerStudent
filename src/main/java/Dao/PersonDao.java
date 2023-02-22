@@ -45,7 +45,7 @@ public class PersonDao {
      * @param personID a personID
      * @return Person a person
      * */
-    Person findPerson(String personID) throws DataAccessException {
+    public Person findPerson(String personID) throws DataAccessException {
         Person person;
         ResultSet rs;
         String sql = "SELECT * FROM Persons WHERE personID = ?;";
