@@ -36,6 +36,8 @@ public class Server {
         server.createContext("/load", new LoadHandler());
         server.createContext("/person/", new PersonIDHandler());
         server.createContext("/person", new PersonUserHandler());
+        server.createContext("/event/", new EventIDHandler());
+        server.createContext("/event", new EventAllHandler());
 
         server.createContext("/", new FileHandler());
 

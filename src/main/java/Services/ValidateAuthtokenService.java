@@ -18,7 +18,6 @@ public class ValidateAuthtokenService {
             AuthtokenDao authtokenDao = new AuthtokenDao(db.getConnection());
             AuthToken authToken = authtokenDao.findUserName(givenAuthtoken);
 
-            System.out.printf(authToken.getAuthtoken());
             db.closeConnection(false);
 
             if (authToken != null){

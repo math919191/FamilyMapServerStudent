@@ -23,6 +23,7 @@ public class EventIDResponse extends Response {
         this.eventType = eventType;
         this.year = year;
         this.success = success;
+        this.message = "event ID response message";
     }
 
     public String getAssociatedUsername() {
