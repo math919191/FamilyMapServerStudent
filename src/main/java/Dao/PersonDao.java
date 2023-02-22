@@ -20,7 +20,7 @@ public class PersonDao {
      * inserts a person into the database
      * @param person a person
      * */
-    void insertPerson(Person person) throws DataAccessException {
+    public void insertPerson(Person person) throws DataAccessException {
         String sql = "INSERT INTO Persons (personID, associatedUsername, firstName, lastName, " +
                 "gender, fatherID, motherID, spouseID) VALUES(?,?,?,?,?,?,?,?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)){
@@ -110,6 +110,16 @@ public class PersonDao {
 
     }
 
+    public void clearWithUsername(String username) throws DataAccessException {
+        String sql = "DELETE FROM Persons WHERE associatedUsername =?;";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1,username);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DataAccessException("Error encountered while clearing the event table of user's data");
+        }
+    }
 
     /**
      * clears the person table

@@ -1,6 +1,14 @@
 package Services;
 
+import Dao.*;
+import Model.Data.GenerateFamilyTree;
+import Response.ClearResponse;
+import Response.Response;
+
+import Response.ErrorResponse;
 import Response.FillResponse;
+
+import java.sql.Connection;
 
 public class FillService {
 
@@ -16,9 +24,52 @@ public class FillService {
      * @return FillResponse
      * */
 
-    FillResponse fill(String username, int generations){
-        //verify the username is registered
-        //generate
-        return null;
+    public Response fill(String username, int generations){
+
+        Database db = new Database();
+        try {
+            db.openConnection();
+
+            if (userIsRegistered(username, db.getConnection())){
+                deleteAnyDataAssociatedWithUser(username, db.getConnection());
+            } else {
+                throw new Exception("invalid username");
+            }
+
+            GenerateFamilyTree t = new GenerateFamilyTree(username, db.getConnection());
+            t.generateTree(generations);
+
+            db.closeConnection(true);
+
+            FillResponse result = new FillResponse("Clear Succeeded", true);
+
+            return result;
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            db.closeConnection(false);
+            ErrorResponse result = new ErrorResponse("Fill Failed", false);
+            return result;
+
+        }
+    }
+
+    private boolean userIsRegistered(String username, Connection connection) throws DataAccessException {
+        UserDao uDao = new UserDao(connection);
+        if (uDao.findUserFromUserName(username) == null){
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
+    private void deleteAnyDataAssociatedWithUser(String username, Connection connection) throws DataAccessException {
+        PersonDao pDao = new PersonDao(connection);
+        pDao.clearWithUsername(username);
+
+        EventDao eDao = new EventDao(connection);
+        eDao.clearWithUsername(username);
+
     }
 }

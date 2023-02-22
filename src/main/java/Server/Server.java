@@ -37,8 +37,6 @@ public class Server {
         server.createContext("/person/", new PersonIDHandler());
         server.createContext("/person", new PersonUserHandler());
 
-        //server.createContext("/games/list", new ListGamesHandler());
-        //server.createContext("/routes/claim", new ClaimRouteHandler());
         server.createContext("/", new FileHandler());
 
         System.out.println("Starting server");
