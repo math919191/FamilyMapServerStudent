@@ -21,7 +21,7 @@ import java.sql.Connection;
 
 import static java.lang.Character.isDigit;
 
-public class FillHandler implements HttpHandler {
+public class FillHandler extends Handler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         boolean success = false;
@@ -60,12 +60,6 @@ public class FillHandler implements HttpHandler {
         }
 
 
-    }
-
-    private void writeString(String str, OutputStream os) throws IOException {
-        OutputStreamWriter sw = new OutputStreamWriter(os);
-        sw.write(str);
-        sw.flush();
     }
 
     private String getUserNameFromUrl(String url){

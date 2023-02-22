@@ -5,7 +5,7 @@ import com.sun.net.httpserver.HttpHandler;
 
 import java.io.IOException;
 
-public class PersonUserHandler implements HttpHandler {
+public class PersonUserHandler extends Handler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
 

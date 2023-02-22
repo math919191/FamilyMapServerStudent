@@ -11,7 +11,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.nio.file.Files;
 
-public class FileHandler implements HttpHandler {
+public class FileHandler extends Handler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         boolean success = false;

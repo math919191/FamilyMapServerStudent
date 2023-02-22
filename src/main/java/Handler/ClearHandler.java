@@ -19,7 +19,7 @@ import java.net.HttpURLConnection;
 
 import static java.nio.file.Files.readString;
 
-public class ClearHandler implements HttpHandler {
+public class ClearHandler extends Handler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         boolean success = false;
@@ -53,11 +53,6 @@ public class ClearHandler implements HttpHandler {
             e.printStackTrace();
         }
 
-    }
-    private void writeString(String str, OutputStream os) throws IOException {
-        OutputStreamWriter sw = new OutputStreamWriter(os);
-        sw.write(str);
-        sw.flush();
     }
 
 }

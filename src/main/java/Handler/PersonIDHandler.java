@@ -12,7 +12,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 
-public class PersonIDHandler implements HttpHandler {
+public class PersonIDHandler extends Handler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
 
@@ -60,13 +60,6 @@ public class PersonIDHandler implements HttpHandler {
 
     }
 
-    private boolean isAuthTokenValid(String authToken) {
-        return new ValidateAuthtokenService().validateAuthToken(authToken);
-    }
 
-    private void writeString(String str, OutputStream os) throws IOException {
-        OutputStreamWriter sw = new OutputStreamWriter(os);
-        sw.write(str);
-        sw.flush();
-    }
+
 }

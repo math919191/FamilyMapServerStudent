@@ -49,6 +49,8 @@ public class UserLoginService {
 
             String authToken = getAuthToken(user, db.getConnection());
 
+            db.closeConnection(true);
+
             UserLoginResponse response = new UserLoginResponse(authToken, user.getUsername(), user.getPersonID(), true );
 
             return response;
