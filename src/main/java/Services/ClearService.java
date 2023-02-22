@@ -36,7 +36,7 @@ public class ClearService {
         }
     }
 
-    private void clearGivenConnection(Connection connection) throws DataAccessException {
+    public void clearGivenConnection(Connection connection) throws DataAccessException {
         new EventDao(connection).clear();
         new UserDao(connection).clear();
         new AuthtokenDao(connection).clear();
