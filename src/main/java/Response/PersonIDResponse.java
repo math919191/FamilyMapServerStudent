@@ -10,7 +10,6 @@ public class PersonIDResponse extends Response {
     private String fatherID;
     private String motherID;
     private String spouseID;
-    private boolean success;
 
 
     public PersonIDResponse(String associatedUsername, String personID, String firstName, String lastName, String gender, String fatherID, String motherID, String spouseID, boolean success) {
@@ -23,6 +22,7 @@ public class PersonIDResponse extends Response {
         this.motherID = motherID;
         this.spouseID = spouseID;
         this.success = success;
+        this.message = "success on personID";
     }
 
     public String getAssociatedUsername() {

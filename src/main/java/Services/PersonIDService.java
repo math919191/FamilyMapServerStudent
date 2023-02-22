@@ -24,19 +24,14 @@ public class PersonIDService {
         Database db = new Database();
         try {
             db.openConnection();
-            new ClearService().clearGivenConnection(db.getConnection());
 
             //get the person with the id
             Person person = new PersonDao(db.getConnection()).findPerson(personID);
 
             //get the username of the person by using the authtoken
-//            AuthtokenDao authtokenDao = new AuthtokenDao(db.getConnection());
-//            AuthToken authToken1 = authtokenDao.findUserName(authToken);
 
-            System.out.printf(givenAuthtoken);
             AuthtokenDao authtokenDao = new AuthtokenDao(db.getConnection());
             AuthToken authToken1 = authtokenDao.findUserName(givenAuthtoken);
-            System.out.printf(authToken1.getAuthtoken());
 
 
             if (authToken1 == null){
@@ -50,7 +45,7 @@ public class PersonIDService {
             }
 
             //create a response and send it back
-            db.closeConnection(true);
+            db.closeConnection(false);
 
 
             PersonIDResponse response = getPersonIDResponseFromPerson(person);
@@ -67,6 +62,7 @@ public class PersonIDService {
     }
 
     private PersonIDResponse getPersonIDResponseFromPerson(Person person) {
+
         return new PersonIDResponse(
                 person.getAssociatedUsername(),
                 person.getPersonID(),

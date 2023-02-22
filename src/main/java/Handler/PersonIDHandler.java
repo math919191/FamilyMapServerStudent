@@ -29,12 +29,14 @@ public class PersonIDHandler implements HttpHandler {
                         throw new Exception("invalid authtoken");
                     }
                     String urlPath = exchange.getRequestURI().toString();
-                    String personID = urlPath.substring(urlPath.lastIndexOf("/"));
+                    String personID = urlPath.substring(urlPath.lastIndexOf("/")+1);
 
                     PersonIDService service = new PersonIDService();
                     Response result = service.getPersonFromPersonID(personID, authToken);
 
                     String respData = gson.toJson(result).toString();
+
+                    exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
                     OutputStream respBody = exchange.getResponseBody();
 
                     writeString(respData, respBody);
