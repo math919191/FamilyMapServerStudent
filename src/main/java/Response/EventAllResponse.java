@@ -1,22 +1,23 @@
 package Response;
 
+import Model.Event;
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 
 public class EventAllResponse extends Response {
-    private ArrayList<JsonObject> data;
+    private ArrayList<Event> data;
 
-    public EventAllResponse(ArrayList<JsonObject> data, boolean success) {
+    public EventAllResponse(ArrayList<Event> data, boolean success) {
         this.data = data;
         this.success = success;
     }
 
-    public ArrayList<JsonObject> getData() {
+    public ArrayList<Event> getData() {
         return data;
     }
 
-    public void setData(ArrayList<JsonObject> data) {
+    public void setData(ArrayList<Event> data) {
         this.data = data;
     }
 
