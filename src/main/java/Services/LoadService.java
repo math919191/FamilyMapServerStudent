@@ -48,7 +48,6 @@ public class LoadService {
 
             db.closeConnection(true);
 
-
             //creates a LoadResponse object and returns
             LoadResponse response = new LoadResponse(numPersonsAdded, numUsersAdded, numEventsAdded);
             return response;

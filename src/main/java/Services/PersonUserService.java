@@ -33,12 +33,17 @@ public class PersonUserService {
             //get the username of the person by using the authtoken
             AuthtokenDao authtokenDao = new AuthtokenDao(db.getConnection());
             AuthToken authToken1 = authtokenDao.findUserName(authToken);
+
+            if (authToken1 == null){
+                throw new Exception("invalid authtoken bad request");
+            }
             String username = authToken1.getUsername();
 
 
             //get all the people with the associated username
             PersonDao personDao = new PersonDao(db.getConnection());
             ArrayList<Person> persons = personDao.findPersons(username);
+
 
             db.closeConnection(false);
 
@@ -50,7 +55,7 @@ public class PersonUserService {
         } catch (Exception ex) {
             ex.printStackTrace();
             db.closeConnection(false);
-            ErrorResponse result = new ErrorResponse("Person User service failed", false);
+            ErrorResponse result = new ErrorResponse("Person User service failed" + ex.getMessage(), false);
             return result;
 
         }

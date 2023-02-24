@@ -10,6 +10,7 @@ import Model.User;
 
 import java.io.FileNotFoundException;
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.UUID;
 
 public class GenerateFamilyTree {
@@ -31,7 +32,10 @@ public class GenerateFamilyTree {
 
     public void generateTree(int generations){
         try {
-            Person p = generatePerson(getGender(username), generations);
+            generatePerson(getGender(username), generations);
+            insertUser(generations);
+
+
         } catch (DataAccessException e) {
             e.printStackTrace();
             System.out.printf("error while inserting into database");
@@ -86,9 +90,37 @@ public class GenerateFamilyTree {
         return person;
     }
 
-////            person = generateUserPerson(username, null, null, null);
+
+    private void insertUser(int generations) throws DataAccessException {
+        //If the number of generations is 1, then they don't have parents/
+        if (generations == 0){
+            generateUserPerson(username, null, null, null);
+            return;
+        }
+
+        //find the birth events of the parents based on the year
+        ArrayList<Event> birthEvents = new EventDao(connection).findAllEventsWithYear(1970);
+        String fatherID;
+        String motherID;
+        String id1 = birthEvents.get(0).getPersonID();
+        String id2 = birthEvents.get(1).getPersonID();
+
+        Person person1 = new PersonDao(connection).findPerson(id1);
+        if (person1.getGender() == "m"){
+            fatherID = id1;
+            motherID = id2;
+        } else {
+            fatherID = id2;
+            motherID = id1;
+        }
+
+        //generates the person based on given info and inserts in to db
+        generateUserPerson(username, fatherID, motherID, null);
+
+    }
 
     private int getYear(String eventType, int genNum){
+        genNum = genNum + 1;
         //assuming all individuals in the same generation were born and died in the same year
         // everyone died at 50
         // everyone was married at 25

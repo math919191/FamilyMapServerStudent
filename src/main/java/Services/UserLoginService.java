@@ -32,18 +32,18 @@ public class UserLoginService {
             db.openConnection();
 
             if (!hasValidRequest(userLoginRequest)){
-                throw new Exception("missing username or password");
+                throw new Exception("missing username or password bad request");
             }
 
             User user = getUser(userLoginRequest.getUsername(), db.getConnection());
             if (user == null){
-                throw new Exception("User doesn't exist");
+                throw new Exception("User doesn't exist bad request");
             }
 
             boolean valid = isUsernameAndPasswordValid(userLoginRequest.getUsername(), userLoginRequest.getPassword(), user);
 
             if (!valid){
-                throw new Exception("Invalid username or password");
+                throw new Exception("Invalid username or password bad request");
             }
 
 
@@ -58,7 +58,7 @@ public class UserLoginService {
         }   catch (Exception ex) {
             ex.printStackTrace();
             db.closeConnection(false);
-            ErrorResponse result = new ErrorResponse("User login Failed", false);
+            ErrorResponse result = new ErrorResponse("User login Failed" + ex.getMessage(), false);
             return result;
 
         }

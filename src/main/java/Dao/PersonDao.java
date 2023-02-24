@@ -106,8 +106,8 @@ public class PersonDao {
             e.printStackTrace();
             throw new DataAccessException("Error encountered while finding all people associated with username in db");
         }
-
     }
+
 
     public void clearWithUsername(String username) throws DataAccessException {
         String sql = "DELETE FROM Persons WHERE associatedUsername =?;";

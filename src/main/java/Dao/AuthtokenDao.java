@@ -75,7 +75,7 @@ public class AuthtokenDao {
             rs = stmt.executeQuery();
             if (rs.next()) {
                 myAuthToken = new AuthToken(
-                        rs.getString("authtoken"),
+                        rs.getString("authToken"),
                         rs.getString("username")
                 );
                 return myAuthToken;

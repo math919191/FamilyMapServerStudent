@@ -130,6 +130,28 @@ public class EventDao {
     }
 
 
+    public ArrayList<Event> findAllEventsWithYear(int year) throws DataAccessException {
+        ResultSet rs;
+        ArrayList<Event> events = new ArrayList<>();
+        String sql = "SELECT * FROM Events WHERE year=?;";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, String.valueOf(year));
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                Event event = new Event(rs.getString("eventID"), rs.getString("associatedUsername"),
+                        rs.getString("personID"), rs.getFloat("latitude"), rs.getFloat("longitude"),
+                        rs.getString("country"), rs.getString("city"), rs.getString("eventType"),
+                        rs.getInt("year"));
+                events.add(event);
+            } return events;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DataAccessException("Error encountered while finding all events in database");
+        }
+    }
+
+
+
 
     public void clearWithUsername(String username) throws DataAccessException {
         String sql = "DELETE FROM Events WHERE associatedUsername =?;";

@@ -17,47 +17,40 @@ public class EventIDHandler extends Handler {
     public void handle(HttpExchange exchange) throws IOException {
         boolean success = false;
         Gson gson = new Gson();
-        try {
-            if (exchange.getRequestMethod().toLowerCase().equals("get")){
 
-                Headers reqHeaders = exchange.getRequestHeaders();
-                if (reqHeaders.containsKey("Authorization")){
-                    String authToken = reqHeaders.getFirst("Authorization");
+        if (exchange.getRequestMethod().toLowerCase().equals("get")){
 
-//                    if (!isAuthTokenValid(authToken)){
-//                        throw new Exception("invalid authtoken");
-//                    }
-                    String urlPath = exchange.getRequestURI().toString();
-                    String eventID = urlPath.substring(urlPath.lastIndexOf("/")+1);
+            Headers reqHeaders = exchange.getRequestHeaders();
+            if (reqHeaders.containsKey("Authorization")){
 
-                    EventIDService service = new EventIDService();
-                    Response result = service.getEventFromEventID(eventID, authToken);
+                String authToken = reqHeaders.getFirst("Authorization");
 
-                    String respData = gson.toJson(result).toString();
+                String urlPath = exchange.getRequestURI().toString();
+                String eventID = urlPath.substring(urlPath.lastIndexOf("/")+1);
 
-                    int responseVal = getHTTPResponseVal(result);
-                    exchange.sendResponseHeaders(responseVal, 0);
+                EventIDService service = new EventIDService();
+                Response result = service.getEventFromEventID(eventID, authToken);
 
-                    OutputStream respBody = exchange.getResponseBody();
+                String respData = gson.toJson(result).toString();
 
-                    writeString(respData, respBody);
-                    respBody.close();
-                    success = true;
+                int responseVal = getHTTPResponseVal(result);
+                exchange.sendResponseHeaders(responseVal, 0);
 
-                }
+                OutputStream respBody = exchange.getResponseBody();
+
+                writeString(respData, respBody);
+                respBody.close();
+                success = true;
 
             }
 
-            if (!success){
-                exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
-                exchange.getResponseBody().close();
-            }
-
-        } catch (Exception e) {
-            exchange.sendResponseHeaders(HttpURLConnection.HTTP_SERVER_ERROR, 0);
-            exchange.getResponseBody().close();
-            e.printStackTrace();
         }
+
+        if (!success){
+            exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
+            exchange.getResponseBody().close();
+        }
+
 
     }
 }

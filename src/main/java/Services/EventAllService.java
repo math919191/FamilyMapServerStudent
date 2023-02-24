@@ -29,14 +29,18 @@ public class EventAllService {
             //get the username of the person by using the authtoken
             AuthtokenDao authtokenDao = new AuthtokenDao(db.getConnection());
             AuthToken authToken1 = authtokenDao.findUserName(authToken);
-            String username = authToken1.getUsername();
 
+            if (authToken1 == null){
+                throw new Exception("invalid authtoken bad request");
+            }
+
+            String username = authToken1.getUsername();
 
             //get all the events with the associated username
             EventDao eventDao = new EventDao(db.getConnection());
             ArrayList<Event> events = eventDao.findAllEventsWithUsername(username);
 
-            db.closeConnection(false);
+            db.closeConnection(true);
 
             //create a response and send it back
             EventAllResponse response = new EventAllResponse(events, true);
@@ -46,7 +50,7 @@ public class EventAllService {
         } catch (Exception ex) {
             ex.printStackTrace();
             db.closeConnection(false);
-            ErrorResponse result = new ErrorResponse("Person User service failed", false);
+            ErrorResponse result = new ErrorResponse("EventAll service failed:" + ex.getMessage(), false);
             return result;
 
         }

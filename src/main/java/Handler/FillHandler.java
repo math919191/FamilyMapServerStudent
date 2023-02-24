@@ -66,9 +66,11 @@ public class FillHandler extends Handler {
 
     private String getUserNameFromUrl(String url){
         url = url.substring(6);
-        String username = url.substring(0, url.indexOf('/'));
-
-        return username;
+        if (!url.contains("/")){
+            return url;
+        } else {
+            return  url.substring(0, url.indexOf("/"));
+        }
     }
 
     private int getGenerationsFromURL(String url){

@@ -39,13 +39,18 @@ public class Handler implements HttpHandler {
     public int getHTTPResponseVal(Response result){
         int responseVal;
         if (result instanceof ErrorResponse){
-            responseVal = HttpURLConnection.HTTP_BAD_REQUEST;
+            ErrorResponse errorResponse = (ErrorResponse) result;
+            if (errorResponse.getMessage().contains("bad request")){
+                responseVal = HttpURLConnection.HTTP_BAD_REQUEST;
+            } else if (errorResponse.getMessage().contains("invalid authtoken")) {
+                responseVal = HttpURLConnection.HTTP_BAD_REQUEST;
+            } else {
+                responseVal = HttpURLConnection.HTTP_BAD_REQUEST;
+            }
         } else {
             responseVal = HttpURLConnection.HTTP_OK;
         }
         return responseVal;
-
-
     }
 
 

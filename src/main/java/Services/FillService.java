@@ -41,7 +41,7 @@ public class FillService {
 
             db.closeConnection(true);
 
-            FillResponse result = new FillResponse("Fill Succeeded", true);
+            FillResponse result = new FillResponse("Successfully added ", true);
 
             return result;
 

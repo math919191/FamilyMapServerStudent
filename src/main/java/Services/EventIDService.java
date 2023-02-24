@@ -26,17 +26,23 @@ public class EventIDService {
 
             //get the event with the id
             Event event = new EventDao(db.getConnection()).findEvent(eventID);
+            if (event == null){
+                throw new Exception("invalid eventID bad request");
+            }
 
             //get the username of the person by using the authtoken
 
             AuthtokenDao authtokenDao = new AuthtokenDao(db.getConnection());
             AuthToken authToken1 = authtokenDao.findUserName(givenAuthtoken);
+            if (authToken1 == null){
+                throw new Exception("invalid authToken bad request");
+            }
 
             String usernameFromAuthToken = authToken1.getUsername();
 
             //verify the usernames match
             if (!usernameFromAuthToken.equals(event.getAssociatedUsername())){
-                throw new Exception("Usernames do not match...invalid something");
+                throw new Exception("Username from authToken and Username from event do not match bad request");
             }
 
             //create a response and send it back
@@ -48,7 +54,7 @@ public class EventIDService {
         } catch (Exception ex) {
             ex.printStackTrace();
             db.closeConnection(false);
-            ErrorResponse result = new ErrorResponse("Event ID service failed", false);
+            ErrorResponse result = new ErrorResponse("Event ID service failed" + ex.getMessage(), false);
             return result;
 
         }

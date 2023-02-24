@@ -24,36 +24,32 @@ public class ClearHandler extends Handler {
     public void handle(HttpExchange exchange) throws IOException {
         boolean success = false;
         Gson gson = new Gson();
-        try {
-            if (exchange.getRequestMethod().toLowerCase().equals("post")) {
 
-                ClearService service = new ClearService();
-                Response result = service.clear();
+        if (exchange.getRequestMethod().toLowerCase().equals("post")) {
 
-                String respData = gson.toJson(result).toString();
+            ClearService service = new ClearService();
+            Response result = service.clear();
+
+            String respData = gson.toJson(result).toString();
 
 
-                int responseVal = getHTTPResponseVal(result);
-                exchange.sendResponseHeaders(responseVal, 0);
+            int responseVal = getHTTPResponseVal(result);
+            exchange.sendResponseHeaders(responseVal, 0);
 
-                OutputStream respBody = exchange.getResponseBody();
+            OutputStream respBody = exchange.getResponseBody();
 
-                writeString(respData, respBody);
-                respBody.close();
+            writeString(respData, respBody);
+            respBody.close();
 
-                success = true;
+            success = true;
 
-            }
-
-            if (!success){
-                exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
-                exchange.getResponseBody().close();
-            }
-        } catch (IOException e) {
-            exchange.sendResponseHeaders(HttpURLConnection.HTTP_SERVER_ERROR, 0);
-            exchange.getResponseBody().close();
-            e.printStackTrace();
         }
+
+        if (!success){
+            exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
+            exchange.getResponseBody().close();
+        }
+
 
     }
 

@@ -25,9 +25,6 @@ public class PersonIDHandler extends Handler {
                 if (reqHeaders.containsKey("Authorization")){
                     String authToken = reqHeaders.getFirst("Authorization");
 
-                    if (!isAuthTokenValid(authToken)){
-                        throw new Exception("invalid authtoken");
-                    }
                     String urlPath = exchange.getRequestURI().toString();
                     String personID = urlPath.substring(urlPath.lastIndexOf("/")+1);
 

@@ -28,6 +28,10 @@ public class PersonIDService {
             //get the person with the id
             Person person = new PersonDao(db.getConnection()).findPerson(personID);
 
+            if (person == null){
+                throw new Exception("invalid personID bad request");
+            }
+
             //get the username of the person by using the authtoken
 
             AuthtokenDao authtokenDao = new AuthtokenDao(db.getConnection());
@@ -35,13 +39,13 @@ public class PersonIDService {
 
 
             if (authToken1 == null){
-                throw new Exception("Invalid auth token");
+                throw new Exception("invalid authToken bad request");
             }
             String usernameFromAuthToken = authToken1.getUsername();
 
             //verify the usernames match
             if (!usernameFromAuthToken.equals(person.getAssociatedUsername())){
-                throw new Exception("Usernames do not match...invalid something");
+                throw new Exception("Usernames do not match...invalid something bad request ");
             }
 
             //create a response and send it back
@@ -54,7 +58,7 @@ public class PersonIDService {
         } catch (Exception ex) {
             ex.printStackTrace();
             db.closeConnection(false);
-            ErrorResponse result = new ErrorResponse("Person ID service failed", false);
+            ErrorResponse result = new ErrorResponse("Person ID service failed " + ex.getMessage(), false);
             return result;
 
         }
