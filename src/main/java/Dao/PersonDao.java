@@ -7,10 +7,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
+/** person data access object*/
 public class PersonDao {
-
+    /** Database connection */
     private final Connection conn;
+    /** personDao constructor sets db connection
+     * @param conn daatabase connection
+     * */
     public PersonDao(Connection conn) {
         this.conn = conn;
     }
@@ -108,7 +111,10 @@ public class PersonDao {
         }
     }
 
-
+    /**
+     * clears all persons associated with a username
+     * @param username desired username
+     * */
     public void clearWithUsername(String username) throws DataAccessException {
         String sql = "DELETE FROM Persons WHERE associatedUsername =?;";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -120,6 +126,10 @@ public class PersonDao {
         }
     }
 
+    /**
+     * Finds all of the persons associated with a personID
+     * @param personID desired personID
+     * */
     public void deleteWithPersonID(String personID) throws DataAccessException {
         String sql = "DELETE FROM Persons WHERE personID =?;";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {

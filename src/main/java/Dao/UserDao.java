@@ -7,9 +7,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/** User Data Acess Object */
 public class UserDao {
-
+    /** Database connection */
     private final Connection conn;
+    /** User Dao constructor sets db connection
+     * @param conn database connection
+     * */
     public UserDao(Connection conn) {
         this.conn = conn;
     }
@@ -62,7 +66,10 @@ public class UserDao {
             throw new DataAccessException("Error encountered while finding a user in the database");
         }
     }
-
+    /**
+     * finds user from given username
+     * @param username given username
+     * */
 
     public User findUserFromUserName(String username) throws DataAccessException {
         User user;

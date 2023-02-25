@@ -10,7 +10,7 @@ import Response.EventAllResponse;
 import Response.Response;
 
 import java.util.ArrayList;
-
+/** Returns all events associated with a user */
 public class EventAllService {
 
     /**
@@ -31,7 +31,7 @@ public class EventAllService {
             AuthToken authToken1 = authtokenDao.findUserName(authToken);
 
             if (authToken1 == null){
-                throw new Exception("invalid authtoken bad request");
+                throw new Exception("invalid authtoken - bad request");
             }
 
             String username = authToken1.getUsername();

@@ -10,7 +10,7 @@ import Response.ErrorResponse;
 import Response.Response;
 
 import java.util.ArrayList;
-
+/** returns all the users assoicated with a user */
 public class PersonUserService {
 
     /**
@@ -35,7 +35,7 @@ public class PersonUserService {
             AuthToken authToken1 = authtokenDao.findUserName(authToken);
 
             if (authToken1 == null){
-                throw new Exception("invalid authtoken bad request");
+                throw new Exception("invalid authtoken - bad request");
             }
             String username = authToken1.getUsername();
 
@@ -55,7 +55,7 @@ public class PersonUserService {
         } catch (Exception ex) {
             ex.printStackTrace();
             db.closeConnection(false);
-            ErrorResponse result = new ErrorResponse("Person User service failed" + ex.getMessage(), false);
+            ErrorResponse result = new ErrorResponse("Person User service failed " + ex.getMessage(), false);
             return result;
 
         }

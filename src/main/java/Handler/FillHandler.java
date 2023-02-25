@@ -1,25 +1,13 @@
 package Handler;
 
-import Dao.DataAccessException;
-import Dao.Database;
-import Model.Data.GenerateFamilyTree;
-import Model.Data.LoadData;
 import Response.Response;
 import Services.FillService;
 import com.google.gson.Gson;
-import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
-import passoffrequest.FillRequest;
-import passoffresult.FillResult;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
-import java.sql.Connection;
-
-import static java.lang.Character.isDigit;
 
 public class FillHandler extends Handler {
     @Override

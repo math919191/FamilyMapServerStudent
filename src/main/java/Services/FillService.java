@@ -13,6 +13,7 @@ import Response.FillResponse;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+/** Fill class generates fake family tree data for given user */
 public class FillService {
 
     /**
@@ -57,16 +58,31 @@ public class FillService {
         }
     }
 
+    /**
+     * gets the number of persons added to the database for the response
+     * @param connection the database connection to use dao
+     * @param username username of the person whose events/persons were added
+     * */
     private int getPersonsAdded(Connection connection, String username) throws DataAccessException {
         ArrayList<Person> p = new PersonDao(connection).findPersons(username);
         return p.size();
     }
 
+    /**
+     * gets the number of events added to the database for the response
+     * @param connection the database connection to use dao
+     * @param username username of the person whose events/persons were added
+     * */
     private int getEventsAdded(Connection connection, String username) throws DataAccessException {
         ArrayList<Event> p = new EventDao(connection).findAllEventsWithUsername(username);
         return p.size();
     }
 
+    /**
+     * checks if the user is already registered
+     * @param username username of the person whose events/persons are to be added
+     * @param connection the database connection to use dao
+     * */
     private boolean userIsRegistered(String username, Connection connection) throws DataAccessException {
         UserDao uDao = new UserDao(connection);
         if (uDao.findUserFromUserName(username) == null){
@@ -76,7 +92,11 @@ public class FillService {
         }
 
     }
-
+    /**
+     * deletes the existing data of the user
+     * @param username username of the person whose events/persons were added
+     * @param connection the database connection to use dao
+     * */
     private void deleteAnyDataAssociatedWithUser(String username, Connection connection) throws DataAccessException {
         PersonDao pDao = new PersonDao(connection);
         pDao.clearWithUsername(username);

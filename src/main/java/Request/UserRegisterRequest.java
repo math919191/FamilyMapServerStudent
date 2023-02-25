@@ -1,13 +1,20 @@
 package Request;
-
+/** user register request */
 public class UserRegisterRequest {
+    /** user's username */
     private String username;
+    /** user's password */
     private String password;
+    /** user's email */
     private String email;
+    /** user's first name */
     private String firstName;
+    /** user's last name */
     private String lastName;
+    /** user's gender */
     private String gender;
 
+    /** UserRegister Request constructor sets all the private fields */
     public UserRegisterRequest(String username, String password, String email, String firstName, String lastName, String gender) {
         this.username = username;
         this.password = password;

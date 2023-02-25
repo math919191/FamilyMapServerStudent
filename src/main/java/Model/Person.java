@@ -1,18 +1,26 @@
 package Model;
 
 import java.util.Objects;
-
+/** Person Model class */
 public class Person {
-
+    /** personID as a unique identifier of the person*/
     private String personID;
+    /** name of user this person belongs to */
     private String associatedUsername;
+    /** Person's first name */
     private String firstName;
+    /** Person's last name */
     private String lastName;
+    /** Person's gender */
     private String gender;
+    /** Id associated with person's father */
     private String fatherID;
+    /** Id associated with person's mother */
     private String motherID;
+    /** Id associated with person's spouse */
     private String spouseID;
 
+    /** Person's constructor, sets all private fields */
     public Person(String personID, String associatedUsername, String firstName, String lastName, String gender, String fatherID, String motherID, String spouseID) {
         this.personID = personID;
         this.associatedUsername = associatedUsername;

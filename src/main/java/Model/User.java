@@ -1,17 +1,24 @@
 package Model;
 
 import java.util.Objects;
-
+/** User model class */
 public class User {
-
+    /** User's username*/
     private String username;
+    /** User's password*/
     private String password;
+    /** User's email*/
     private String email;
+    /** User's firstname*/
     private String firstName;
+    /** User's lastName*/
     private String lastName;
+    /** User's gender*/
     private String gender;
+    /** User's personID*/
     private String personID;
 
+    /** User's constructor to set all private fields */
     public User(String username, String password, String email, String firstName, String lastName, String gender, String personID) {
         this.username = username;
         this.password = password;

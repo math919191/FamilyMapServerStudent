@@ -6,10 +6,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+/**
+ * Data Access Object for Authtokens
+ * */
 public class AuthtokenDao {
 
+    /**Connection for datbase*/
     private final Connection conn;
+    /**
+     * Constructor for authtoken dao, initializes connection
+     * @param conn a dabatabase connection
+     * */
     public AuthtokenDao(Connection conn){
         this.conn = conn;
     }

@@ -2,18 +2,30 @@ package Model;
 
 import java.util.Objects;
 
+    /**Event model class */
 public class Event {
+    /** eventID */
 
     private String eventID;
+    /** username that the event belongs to */
+
     private String associatedUsername;
+    /** personID for the person the event is associated with */
     private String personID;
+    /** latitude for the location of the event */
     private float latitude;
+    /** longitude for the location of the event */
     private float longitude;
+    /** country for the location of the event */
     private String country;
+    /** city for the location of the event */
     private String city;
+    /** type of event, eg marriage, birth */
     private String eventType;
+    /** year event happened */
     private int year;
 
+    /** constructor for event , sets all private fields */
     public Event(String eventID, String associatedUsername, String personID, float latitude, float longitude, String country, String city, String eventType, int year) {
         this.eventID = eventID;
         this.associatedUsername = associatedUsername;

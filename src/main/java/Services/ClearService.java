@@ -7,7 +7,7 @@ import Response.ErrorResponse;
 
 
 import java.sql.Connection;
-
+/** Clear service clears all items from the database */
 public class ClearService {
 
     /**
@@ -36,6 +36,7 @@ public class ClearService {
         }
     }
 
+    /** method clears given a database connection */
     public void clearGivenConnection(Connection connection) throws DataAccessException {
         new EventDao(connection).clear();
         new UserDao(connection).clear();

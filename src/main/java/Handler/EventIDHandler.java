@@ -2,11 +2,9 @@ package Handler;
 
 import Response.Response;
 import Services.EventIDService;
-import Services.PersonIDService;
 import com.google.gson.Gson;
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
 
 import java.io.IOException;
 import java.io.OutputStream;

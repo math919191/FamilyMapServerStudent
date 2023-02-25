@@ -1,15 +1,12 @@
 package Handler;
 
 import Response.Response;
-import Services.FillService;
 import Services.PersonIDService;
-import Services.ValidateAuthtokenService;
 import com.google.gson.Gson;
 import com.sun.net.httpserver.*;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 
 public class PersonIDHandler extends Handler {

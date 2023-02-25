@@ -12,6 +12,7 @@ import Response.Response;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+/** Loads fake family tree data in */
 public class LoadService {
 
     /**
@@ -61,6 +62,10 @@ public class LoadService {
         }
     }
 
+    /** Adds events to the database
+     * @param events events to be added
+     * @param connection database connection used to add items
+     * */
     private void addEventsToDatabase(ArrayList<Event> events, Connection connection) throws DataAccessException {
         if (events != null){
 
@@ -71,6 +76,11 @@ public class LoadService {
         }
     }
 
+    /** Adds users to the database
+     * @param users users to be added
+     * @param connection database connection used to add items
+     * */
+
     private void addUsersToDatabase(ArrayList<User> users, Connection connection) throws DataAccessException {
         if (users != null){
 
@@ -80,6 +90,11 @@ public class LoadService {
             }
         }
     }
+
+    /** Adds persons to the database
+     * @param persons persons to be added
+     * @param connection database connection used to add items
+     * */
 
     private void addPersonsToDatabase(ArrayList<Person> persons, Connection connection) throws DataAccessException {
         if (persons != null){

@@ -2,14 +2,23 @@ package Model;
 
 import java.util.Objects;
 
+/** Auth token Dao model */
 public class AuthToken {
+    /** authtoken */
     private String authtoken;
+    /** username */
     private String username;
 
+    /**
+     *  authtoken constructor sets private fields
+     * @param authtoken given authtoken
+     * @param username given username
+     * */
     public AuthToken(String authtoken, String username) {
         this.authtoken = authtoken;
         this.username = username;
     }
+
 
     @Override
     public boolean equals(Object o) {

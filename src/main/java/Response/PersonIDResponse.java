@@ -1,17 +1,25 @@
 package Response;
 
+/** Person ID response class */
 public class PersonIDResponse extends Response {
-
+    /** associated username of the person response */
     private String associatedUsername;
+    /** personID of the person response */
     private String personID;
+    /** first Name of the person*/
     private String firstName;
+    /** last Name of the person*/
     private String lastName;
+    /** gender of the person */
     private String gender;
+    /** fatherID of the person */
     private String fatherID;
+    /** motherID of the person */
     private String motherID;
+    /** spouseID of the person */
     private String spouseID;
 
-
+    /** public constructor of the personID response sets private fields */
     public PersonIDResponse(String associatedUsername, String personID, String firstName, String lastName, String gender, String fatherID, String motherID, String spouseID, boolean success) {
         this.associatedUsername = associatedUsername;
         this.personID = personID;

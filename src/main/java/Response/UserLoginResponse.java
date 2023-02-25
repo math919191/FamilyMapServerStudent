@@ -1,10 +1,14 @@
 package Response;
-
+/** User login response for the login service*/
 public class UserLoginResponse extends Response {
+    /** Auth token from the user loggin in */
     private String authtoken;
+    /** Username of the person logging in */
     private String username;
+    /** PersonID of the person logging in */
     private String personID;
 
+    /** constructor setting the private fields of the response*/
     public UserLoginResponse(String authToken, String username, String personID, boolean success) {
         this.authtoken = authToken;
         this.username = username;

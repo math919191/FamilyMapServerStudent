@@ -14,24 +14,14 @@ import Response.UserRegisterResponse;
 
 import java.sql.Connection;
 import java.util.UUID;
-
+/** registers user and then creates family tree data for them */
 public class UserRegisterService {
 
-/*  From spec
-    URL Path: /user/register
-    Description:
-    Creates a new user account (user row in the database)
-    Generates 4 generations of ancestor data for the new user
-        (just like the /fill endpoint if called with a generations value of 4 and this new user’s username as parameters)
-    Logs the user in
-    Returns an authtoken
-
-    Possible Errors: Request property missing or has invalid value,
-        Username already taken by another user, Internal server error
-*/
-
     /**
-     * Creates user and logs them in
+     * Creates a new user account (user row in the database)
+     * Generates 4 generations of ancestor data for the new user
+     * Logs the user in
+     * Returns an authtoken
      *
      * @param userRegisterRequest the userRegisterRequest
      * @return UserRegisterResponse
@@ -49,7 +39,7 @@ public class UserRegisterService {
             if (!allFieldsValid(userRegisterRequest)){
                 throw new Exception("invalid fields");
             }
-//            TODO check this
+
             User user = makeUser(userRegisterRequest);
             new UserDao(db.getConnection()).insertUser(user);
 
@@ -76,19 +66,30 @@ public class UserRegisterService {
         }
     }
 
+    /** puts auth token in the database
+     * @param authToken given authtoken
+     * @param username given username
+     * @param connection given database connection
+     * */
     private void insertAuthTokenInDB(String authToken, String username, Connection connection) throws DataAccessException {
         AuthToken token = new AuthToken(authToken, username);
         new AuthtokenDao(connection).insertAuthToken(token);
     }
+    /**
+     * Creates a user with the register request
+     * @param req user register request to create User
+     * */
 
     private User makeUser(UserRegisterRequest req){
         return new User(req.getUsername(), req.getPassword(), req.getEmail(), req.getFirstName(), req.getLastName(), req.getGender(), getRandomID());
     }
 
-    private void insertUserInDB(User user, Connection connection) throws DataAccessException {
-        new UserDao(connection).insertUser(user);
-    }
-
+    /**
+     * Checks if a username has already been used
+     * @param username given username
+     * @param connection given connection
+     * @return if the username has been taken
+     * */
     private boolean usernameIsTaken(String username, Connection connection) throws DataAccessException {
 
         User u = new UserDao(connection).findUserFromUserName(username);
@@ -99,13 +100,29 @@ public class UserRegisterService {
         }
     }
 
+    /**
+     * generates a random ID using the UUID class
+     * @return random ID
+     * */
     private String getRandomID(){
         return UUID.randomUUID().toString();
     }
 
+    /**
+     * verify the given fields are valid
+     * @param r user register request with information
+     * */
     private boolean allFieldsValid(UserRegisterRequest r){
-        //TODO write this... what is considered valid?
-        return true;
+        if (r.getUsername() != null &&
+            r.getPassword() != null &&
+                r.getFirstName() != null &&
+                r.getLastName() != null &&
+                r.getEmail() != null
+        ){
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

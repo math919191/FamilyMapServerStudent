@@ -1,8 +1,8 @@
 package Response;
-
+/** response for the clear */
 public class ClearResponse extends Response {
 
-
+    /** Clear Response constructor sets private fields */
     public ClearResponse(String message, boolean success) {
 
         this.message = message;

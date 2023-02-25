@@ -14,6 +14,7 @@ import Response.Response;
 import java.sql.Connection;
 import java.util.UUID;
 
+/** Logs the user in */
 public class UserLoginService {
 
 
@@ -25,30 +26,27 @@ public class UserLoginService {
 */
 
     public Response userLogin(UserLoginRequest userLoginRequest){
-        //Logs the user in
-        //Returns an authtoken.
-
         Database db = new Database();
         try {
             db.openConnection();
 
             if (!hasValidRequest(userLoginRequest)){
-                throw new Exception("missing username or password bad request");
+                throw new Exception("missing username or password - bad request");
             }
 
             User user = getUser(userLoginRequest.getUsername(), db.getConnection());
             if (user == null){
-                throw new Exception("User doesn't exist bad request");
+                throw new Exception("User doesn't exist - bad request");
             }
 
             boolean valid = isUsernameAndPasswordValid(userLoginRequest.getUsername(), userLoginRequest.getPassword(), user);
 
             if (!valid){
-                throw new Exception("Invalid username or password bad request");
+                throw new Exception("Invalid username or password - bad request");
             }
 
 
-//            String authToken = getAuthToken(user, db.getConnection());
+            //generate a new auth token for the user's login
             String authToken = UUID.randomUUID().toString();
             AuthToken authToken1 = new AuthToken(authToken, user.getUsername());
             new AuthtokenDao(db.getConnection()).insertAuthToken(authToken1);
@@ -62,7 +60,7 @@ public class UserLoginService {
         }   catch (Exception ex) {
             ex.printStackTrace();
             db.closeConnection(false);
-            ErrorResponse result = new ErrorResponse("User login Failed" + ex.getMessage(), false);
+            ErrorResponse result = new ErrorResponse("User login Failed " + ex.getMessage(), false);
             return result;
 
         }
@@ -70,11 +68,12 @@ public class UserLoginService {
 
     }
 
-    private String getAuthToken(User user, Connection connection) throws DataAccessException {
-        AuthToken authToken = new AuthtokenDao(connection).findAuthToken(user.getUsername());
-        return authToken.getAuthtoken();
-    }
-
+    /**
+     * checks if the username and password are associated with the given username
+     * @param username the username given
+     * @param password the password given
+     * @param user the user potentially associated with given credentials
+     * */
     private boolean isUsernameAndPasswordValid(String username, String password, User user) {
         if (username.equals(user.getUsername()) && password.equals(user.getPassword())){
             return true;
@@ -83,11 +82,20 @@ public class UserLoginService {
         }
     }
 
+    /**
+     * gets a user from username and connection
+     * @param username given username
+     * @param connection given password
+     * */
     private User getUser(String username, Connection connection) throws DataAccessException {
         User user = new UserDao(connection).findUserFromUserName(username);
         return user;
     }
 
+    /**
+     * checks if the password and username are not null or empty
+     * @param userLoginRequest login request that contains username nad password
+     * */
     private boolean hasValidRequest(UserLoginRequest userLoginRequest) {
         if (userLoginRequest.getPassword() != null
                 && userLoginRequest.getUsername() != null

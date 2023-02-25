@@ -10,6 +10,7 @@ import Response.LoadResponse;
 import Response.PersonIDResponse;
 import Response.Response;
 
+/** returns a person based on the given personID */
 public class PersonIDService {
     /**
      * Returns the single Person object with the specified ID (if the person is associated with the current user).
@@ -29,7 +30,7 @@ public class PersonIDService {
             Person person = new PersonDao(db.getConnection()).findPerson(personID);
 
             if (person == null){
-                throw new Exception("invalid personID bad request");
+                throw new Exception("invalid personID - bad request");
             }
 
             //get the username of the person by using the authtoken
@@ -39,7 +40,7 @@ public class PersonIDService {
 
 
             if (authToken1 == null){
-                throw new Exception("invalid authToken bad request");
+                throw new Exception("invalid authToken - bad request");
             }
             String usernameFromAuthToken = authToken1.getUsername();
 
@@ -48,10 +49,9 @@ public class PersonIDService {
                 throw new Exception("Usernames do not match...invalid something bad request ");
             }
 
-            //create a response and send it back
             db.closeConnection(false);
 
-
+            //create a response and send it back
             PersonIDResponse response = getPersonIDResponseFromPerson(person);
             return response;
 
@@ -65,6 +65,9 @@ public class PersonIDService {
 
     }
 
+    /** Convert the person object to a response
+     * @param person person to be converted to a response
+     * */
     private PersonIDResponse getPersonIDResponseFromPerson(Person person) {
 
         return new PersonIDResponse(

@@ -5,7 +5,13 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * Database class that manages db connections
+ * */
 public class Database {
+    /**
+     * connection for database
+     * */
     private Connection conn;
 
     // Whenever we want to make a change to our database we will have to open a connection and use

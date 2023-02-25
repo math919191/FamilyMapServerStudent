@@ -1,16 +1,25 @@
 package Response;
-
+/** Event ID response */
 public class EventIDResponse extends Response {
-
+    /** Associated username of the event */
     private String associatedUsername;
+    /** Associated eventID of the event*/
     private String eventID;
+    /** Associated Person ID of the event */
     private String personID;
+    /** Latitude location of the event */
     private Float latitude;
+    /** Longitude location of the event */
     private Float longitude;
+    /** country where the event happened */
     private String country;
+    /** city where the event happened */
     private String city;
+    /** type of the event */
     private String eventType;
+    /** Where the event happened */
     private int year;
+    /** Constructor for the  EventIDResponse sets the private fields */
 
     public EventIDResponse(String associatedUsername, String eventID, String personID, Float latitude, Float longitude, String country, String city, String eventType, int year, boolean success) {
         this.associatedUsername = associatedUsername;

@@ -1,23 +1,15 @@
 package Handler;
 
-import Response.ClearResponse;
 import Response.Response;
 
 import Services.ClearService;
 import com.google.gson.Gson;
-import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
 
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
-
-import static java.nio.file.Files.readString;
 
 public class ClearHandler extends Handler {
     @Override

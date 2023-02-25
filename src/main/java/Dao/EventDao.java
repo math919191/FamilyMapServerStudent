@@ -8,10 +8,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-
+/**
+ * Data Access Object for Authtokens
+ * */
 public class EventDao {
-
+    /** connection for database*/
     private final Connection conn;
+    /**
+     * Event Dao constructor, sets connection string
+     * @param conn db connection
+     * */
     public EventDao(Connection conn) {
         this.conn = conn;
     }
@@ -108,7 +114,10 @@ public class EventDao {
     }
 
 
-
+    /**
+     * Finds all of the events associated with a username
+     * @param username desired username
+     * */
     public ArrayList<Event> findAllEventsWithUsername(String username) throws DataAccessException {
         ResultSet rs;
         ArrayList<Event> events = new ArrayList<>();
@@ -129,7 +138,10 @@ public class EventDao {
         }
     }
 
-
+    /**
+     * Finds all of the events associated with a year
+     * @param year desired year
+     * */
     public ArrayList<Event> findAllEventsWithYear(int year) throws DataAccessException {
         ResultSet rs;
         ArrayList<Event> events = new ArrayList<>();
@@ -152,7 +164,10 @@ public class EventDao {
 
 
 
-
+    /**
+     * Clears the data associated with a username
+     * @param username given username
+     * */
     public void clearWithUsername(String username) throws DataAccessException {
         String sql = "DELETE FROM Events WHERE associatedUsername =?;";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {

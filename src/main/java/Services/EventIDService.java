@@ -9,6 +9,7 @@ import Response.ErrorResponse;
 import Response.EventIDResponse;
 import Response.Response;
 
+/** Event Id service gives an event given its eventId */
 public class EventIDService {
 
     /**
@@ -27,7 +28,7 @@ public class EventIDService {
             //get the event with the id
             Event event = new EventDao(db.getConnection()).findEvent(eventID);
             if (event == null){
-                throw new Exception("invalid eventID bad request");
+                throw new Exception("invalid eventID - bad request");
             }
 
             //get the username of the person by using the authtoken
@@ -35,14 +36,14 @@ public class EventIDService {
             AuthtokenDao authtokenDao = new AuthtokenDao(db.getConnection());
             AuthToken authToken1 = authtokenDao.findUserName(givenAuthtoken);
             if (authToken1 == null){
-                throw new Exception("invalid authToken bad request");
+                throw new Exception("invalid authToken - bad request");
             }
 
             String usernameFromAuthToken = authToken1.getUsername();
 
             //verify the usernames match
             if (!usernameFromAuthToken.equals(event.getAssociatedUsername())){
-                throw new Exception("Username from authToken and Username from event do not match bad request");
+                throw new Exception("Username from authToken and Username from event do not match - bad request");
             }
 
             //create a response and send it back
@@ -60,6 +61,10 @@ public class EventIDService {
         }
 
     }
+    /**
+     * Converts event to eventID response
+     * @event Event to be converted to a response
+     * */
 
     private EventIDResponse getEventIDResponseFromEvent(Event event) {
         EventIDResponse idResponse = new EventIDResponse(

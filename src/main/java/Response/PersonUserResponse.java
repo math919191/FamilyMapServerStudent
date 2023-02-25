@@ -4,11 +4,12 @@ import Model.Person;
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
-
+/** Person User response stores the response of the personUser service */
 public class PersonUserResponse extends Response {
 
+    /** list of persons associcated with user */
     private ArrayList<Person> data;
-
+    /** constructor sets private fields */
     public PersonUserResponse(ArrayList<Person> data, boolean success) {
         this.data = data;
         this.success = success;
