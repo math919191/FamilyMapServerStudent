@@ -24,12 +24,14 @@ public class FileHandler extends Handler {
                 String filePath = "web" + urlPath;
                 File file = new File(filePath);
                 if (!file.exists()){
+                    file = new File("web/HTML/404.html");
                     exchange.sendResponseHeaders(HttpURLConnection.HTTP_NOT_FOUND, 0);
-                    exchange.getResponseBody().close();
+
+                } else {
+                    exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
                 }
 
                 OutputStream respBody = exchange.getResponseBody();
-                exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
                 Files.copy(file.toPath(), respBody);
                 respBody.close();
                 success = true;
