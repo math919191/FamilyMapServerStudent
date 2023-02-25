@@ -49,8 +49,9 @@ public class UserRegisterService {
             if (!allFieldsValid(userRegisterRequest)){
                 throw new Exception("invalid fields");
             }
+//            TODO check this
             User user = makeUser(userRegisterRequest);
-            insertUserInDB(user, db.getConnection());
+            new UserDao(db.getConnection()).insertUser(user);
 
             //Generates 4 generations of ancestor data for the new user
             GenerateFamilyTree t = new GenerateFamilyTree(userRegisterRequest.getUsername(), db.getConnection());

@@ -12,6 +12,7 @@ import Response.UserLoginResponse;
 import Response.Response;
 
 import java.sql.Connection;
+import java.util.UUID;
 
 public class UserLoginService {
 
@@ -47,7 +48,10 @@ public class UserLoginService {
             }
 
 
-            String authToken = getAuthToken(user, db.getConnection());
+//            String authToken = getAuthToken(user, db.getConnection());
+            String authToken = UUID.randomUUID().toString();
+            AuthToken authToken1 = new AuthToken(authToken, user.getUsername());
+            new AuthtokenDao(db.getConnection()).insertAuthToken(authToken1);
 
             db.closeConnection(true);
 

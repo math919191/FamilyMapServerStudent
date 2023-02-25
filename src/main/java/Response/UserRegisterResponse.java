@@ -1,23 +1,23 @@
 package Response;
 
 public class UserRegisterResponse extends Response {
-    private String authToken;
+    private String authtoken;
     private String username;
     private String personID;
 
     public UserRegisterResponse(String authToken, String username, String personID, boolean success) {
-        this.authToken = authToken;
+        this.authtoken = authToken;
         this.username = username;
         this.personID = personID;
         this.success = success;
     }
 
-    public String getAuthToken() {
-        return authToken;
+    public String getAuthtoken() {
+        return authtoken;
     }
 
-    public void setAuthToken(String authToken) {
-        this.authToken = authToken;
+    public void setAuthtoken(String authtoken) {
+        this.authtoken = authtoken;
     }
 
     public String getUsername() {

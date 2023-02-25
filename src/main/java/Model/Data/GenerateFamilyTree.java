@@ -19,9 +19,11 @@ public class GenerateFamilyTree {
 
     String username;
     Connection connection;
-    public GenerateFamilyTree(String username, Connection givenConnection){
+    User user;
+    public GenerateFamilyTree(String username, Connection givenConnection) throws DataAccessException {
         this.username = username;
         this.connection = givenConnection;
+        this.user = new UserDao(connection).findUserFromUserName(username);
         try {
             data = new LoadData();
         } catch (FileNotFoundException e) {
@@ -92,7 +94,11 @@ public class GenerateFamilyTree {
 
 
     private void insertUser(int generations) throws DataAccessException {
-        //If the number of generations is 1, then they don't have parents/
+
+        Event birth = generateEvent(user.getPersonID(), getYear("birth", 0), "birth");
+        new EventDao(connection).insertEvent(birth);
+
+        //If the number of generations is 0, then they don't have parents/
         if (generations == 0){
             generateUserPerson(username, null, null, null);
             return;
@@ -115,7 +121,18 @@ public class GenerateFamilyTree {
         }
 
         //generates the person based on given info and inserts in to db
-        generateUserPerson(username, fatherID, motherID, null);
+        Person p = generateUserPerson(username, fatherID, motherID, null);
+
+        //see if this person already exists
+
+        Person possiblePerson = new PersonDao(connection).findPerson(user.getPersonID());
+
+        if (possiblePerson != null){
+            new PersonDao(connection).deleteWithPersonID(user.getPersonID());
+        }
+
+        new PersonDao(connection).insertPerson(p);
+
 
     }
 
@@ -136,7 +153,7 @@ public class GenerateFamilyTree {
     } else if (eventType == "death"){
         return 2050 - genNum*30;
     } else if (eventType == "marriage"){
-        return 2025 - genNum*30;
+        return 2025 - genNum*30 + 50;
     } else { // they'll be 30 for any other events happening in their life.
         return 2030 - genNum*30;
     }
@@ -221,8 +238,6 @@ public class GenerateFamilyTree {
         String spouseID = givenSpouseID;
 
         Person p = new Person(personID, associatedUsername, firstName, lastName, gender, fatherID, motherID, spouseID);
-        new PersonDao(connection).insertPerson(p);
-
         return p;
 
     }

@@ -2,6 +2,8 @@ package Services;
 
 import Dao.*;
 import Model.Data.GenerateFamilyTree;
+import Model.Event;
+import Model.Person;
 import Response.ClearResponse;
 import Response.Response;
 
@@ -9,6 +11,7 @@ import Response.ErrorResponse;
 import Response.FillResponse;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 public class FillService {
 
@@ -39,9 +42,9 @@ public class FillService {
             GenerateFamilyTree t = new GenerateFamilyTree(username, db.getConnection());
             t.generateTree(generations);
 
-            db.closeConnection(true);
+            FillResponse result = new FillResponse(getPersonsAdded(db.getConnection(), username), getEventsAdded(db.getConnection(), username));
 
-            FillResponse result = new FillResponse("Successfully added ", true);
+            db.closeConnection(true);
 
             return result;
 
@@ -52,6 +55,16 @@ public class FillService {
             return result;
 
         }
+    }
+
+    private int getPersonsAdded(Connection connection, String username) throws DataAccessException {
+        ArrayList<Person> p = new PersonDao(connection).findPersons(username);
+        return p.size();
+    }
+
+    private int getEventsAdded(Connection connection, String username) throws DataAccessException {
+        ArrayList<Event> p = new EventDao(connection).findAllEventsWithUsername(username);
+        return p.size();
     }
 
     private boolean userIsRegistered(String username, Connection connection) throws DataAccessException {

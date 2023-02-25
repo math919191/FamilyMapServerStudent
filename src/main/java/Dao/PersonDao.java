@@ -120,6 +120,17 @@ public class PersonDao {
         }
     }
 
+    public void deleteWithPersonID(String personID) throws DataAccessException {
+        String sql = "DELETE FROM Persons WHERE personID =?;";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1,personID);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DataAccessException("Error encountered while clearing the event table of user's data");
+        }
+    }
+
     /**
      * clears the person table
      * */

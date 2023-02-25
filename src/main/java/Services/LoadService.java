@@ -49,7 +49,7 @@ public class LoadService {
             db.closeConnection(true);
 
             //creates a LoadResponse object and returns
-            LoadResponse response = new LoadResponse(numPersonsAdded, numUsersAdded, numEventsAdded);
+            LoadResponse response = new LoadResponse(numUsersAdded, numPersonsAdded, numEventsAdded);
             return response;
 
         } catch (Exception ex) {
