@@ -54,15 +54,6 @@ public class EventDao {
     }
 
     /**
-     * gets all events
-     * @return ArrayList<Event> an array of all the events
-     * */
-     ArrayList<Event> getAllEvents(){
-        return null;
-    }
-
-
-    /**
      * gets an event based on an eventID
      * @param eventID a eventID
      * @return Event the corresponding event to the eventID

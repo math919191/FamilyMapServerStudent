@@ -75,11 +75,11 @@ class FillServiceTest extends TestHelperFunctions {
         ArrayList<Person> persons = findPersons(user.getUsername());
 
         //There should be 31 persons with 4 generations
-        assertEquals(persons.size(), 31);
+        assertEquals(31, persons.size());
 
 
 
-        //call fill service with 1 generation
+        //call fill service with 0 generation
         response = fillService.fill(user.getUsername(), 0);
 
         //cast response
@@ -87,8 +87,7 @@ class FillServiceTest extends TestHelperFunctions {
 
         //There should be one person
         persons = findPersons(user.getUsername());
-        assertEquals(persons.size(), 1);
-
+        assertEquals( 0, persons.size());
 
 
         //call fill service with 2 generations

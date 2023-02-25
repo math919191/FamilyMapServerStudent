@@ -57,9 +57,6 @@ class PersonUserServiceTest extends TestHelperFunctions {
 
         response = personUserService.personUser(authToken.getAuthtoken());
 
-        //check returns a error response
-        assertEquals(response.getClass(), ErrorResponse.class);
-
         //cast to Person all response
         PersonUserResponse personUserResponse = (PersonUserResponse) response;
 

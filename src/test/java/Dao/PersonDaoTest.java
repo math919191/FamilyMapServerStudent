@@ -1,5 +1,6 @@
 package Dao;
 
+import Model.Event;
 import Model.Person;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -92,6 +93,54 @@ class PersonDaoTest {
         assertEquals(people, compareTest);
 
     }
+
+    @Test
+    void clearWithUsernamePass() throws DataAccessException {
+        pDao.insertPerson(person1);
+        Person compareTest = pDao.findPerson(person1.getPersonID());
+        assertEquals(person1, compareTest);
+
+        pDao.clearWithUsername(person1.getAssociatedUsername());
+        compareTest = pDao.findPerson(person1.getPersonID());
+        assertNull(compareTest);
+    }
+
+    @Test
+    void clearWithUsernameFail() throws DataAccessException {
+        pDao.insertPerson(person1);
+
+        // Clearing twice shouldn't cause it to fail
+        pDao.clearWithUsername(person1.getAssociatedUsername());
+        pDao.clearWithUsername(person1.getAssociatedUsername());
+
+        Person compareTest = pDao.findPerson(person1.getPersonID());
+        assertNull(compareTest);
+
+    }
+
+    @Test
+    void deleteWithPersonIDPass() throws DataAccessException {
+        pDao.insertPerson(person1);
+        Person compareTest = pDao.findPerson(person1.getPersonID());
+        assertEquals(person1, compareTest);
+
+        pDao.deleteWithPersonID(person1.getPersonID());
+        compareTest = pDao.findPerson(person1.getPersonID());
+        assertNull(compareTest);
+    }
+
+    @Test
+    void deleteWithPersonIDFail() throws DataAccessException {
+        pDao.insertPerson(person1);
+
+        // Clearing twice shouldn't cause it to fail
+        pDao.deleteWithPersonID(person1.getPersonID());
+        pDao.deleteWithPersonID(person1.getPersonID());
+
+        Person compareTest = pDao.findPerson(person1.getPersonID());
+        assertNull(compareTest);
+    }
+
     @Test
     void clear() throws DataAccessException {
         pDao.clear();

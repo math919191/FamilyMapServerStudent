@@ -116,8 +116,47 @@ class EventDaoTest {
         assertEquals(2, compareTest.size());
         assertEquals(events, compareTest);
 
-
     }
+
+
+    @Test
+    void findAllEventsWithYearPass() throws DataAccessException {
+        eDao.insertEvent(bestEvent);
+        eDao.insertEvent(worstEvent);
+        ArrayList<Event> compareTest = eDao.findAllEventsWithYear(bestEvent.getYear());
+        assertEquals(compareTest.get(0), bestEvent);
+    }
+
+    @Test
+    void findAllEventsWithYearFail() throws DataAccessException {
+        ArrayList<Event> compareTest = eDao.findAllEventsWithYear(200);
+        assertEquals(compareTest.size(), 0);
+    }
+
+    @Test
+    void clearWithUsernamePass() throws DataAccessException {
+        eDao.insertEvent(bestEvent);
+        Event compareTest = eDao.findEvent(bestEvent.getEventID());
+        assertEquals(bestEvent, compareTest);
+
+        eDao.clearWithUsername(bestEvent.getAssociatedUsername());
+        compareTest = eDao.findEvent(bestEvent.getEventID());
+        assertNull(compareTest);
+    }
+
+    @Test
+    void clearWithUsernameFail() throws DataAccessException {
+        eDao.insertEvent(bestEvent);
+
+        // Clearing twice shouldn't cause it to fail
+        eDao.clearWithUsername(bestEvent.getAssociatedUsername());
+        eDao.clearWithUsername(bestEvent.getAssociatedUsername());
+
+        Event compareTest = eDao.findEvent(bestEvent.getEventID());
+        assertNull(compareTest);
+    }
+
+
 
     @Test
     void clear() throws DataAccessException {

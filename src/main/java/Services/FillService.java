@@ -52,7 +52,7 @@ public class FillService {
         } catch (Exception ex) {
             ex.printStackTrace();
             db.closeConnection(false);
-            ErrorResponse result = new ErrorResponse("Fill Failed", false);
+            ErrorResponse result = new ErrorResponse("Fill Failed" + ex.getMessage(), false);
             return result;
 
         }
