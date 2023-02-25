@@ -19,6 +19,7 @@ public class GenerateFamilyTree {
 
     String username;
     Connection connection;
+    int totalGenerations;
     User user;
     public GenerateFamilyTree(String username, Connection givenConnection) throws DataAccessException {
         this.username = username;
@@ -33,6 +34,7 @@ public class GenerateFamilyTree {
     }
 
     public void generateTree(int generations){
+        totalGenerations = generations;
         try {
             generatePerson(getGender(username), generations);
             insertUser(generations);
@@ -95,7 +97,7 @@ public class GenerateFamilyTree {
 
     private void insertUser(int generations) throws DataAccessException {
 
-        Event birth = generateEvent(user.getPersonID(), getYear("birth", 0), "birth");
+        Event birth = generateEvent(user.getPersonID(), getYear("birth", totalGenerations), "birth");
         new EventDao(connection).insertEvent(birth);
 
         //If the number of generations is 0, then they don't have parents/
@@ -137,7 +139,7 @@ public class GenerateFamilyTree {
     }
 
     private int getYear(String eventType, int genNum){
-        genNum = genNum + 1;
+        genNum = this.totalGenerations - genNum;
         //assuming all individuals in the same generation were born and died in the same year
         // everyone died at 50
         // everyone was married at 25
@@ -153,7 +155,7 @@ public class GenerateFamilyTree {
     } else if (eventType == "death"){
         return 2050 - genNum*30;
     } else if (eventType == "marriage"){
-        return 2025 - genNum*30 + 50;
+        return 2025 - genNum*30;
     } else { // they'll be 30 for any other events happening in their life.
         return 2030 - genNum*30;
     }
