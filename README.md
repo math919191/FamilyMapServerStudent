@@ -1,14 +1,11 @@
 # FamilyMapServerStudent
+I really enjoyed working on this assignment. 
+I ended up getting slightly behind in some of my other classes. I've found after I get started on something I have a very hard time letting go until I have it working.
 
-- Refer to the <b>How To Get Started</b> document on the <b>Family Map Server Program Assignment</b> for more detailed instructions and help with common issues. 
-
-General Instructions:
-1.	Follow the instructions on github regarding how to clone this repository into a directory on your local machine.
-2.	Open IntelliJ.
-3.	Select File -> Open...
-4.	Navigate to the newly cloned repository and select it.
-5.	Allow IntelliJ a few minutes to download any dependencies and set up the project.
-6.	Once it is done loading, make sure the main function found in HelloWorld.java runs without errors. It is found inside the project in the ``src/main/java/HelloWorld.java`` directory. 
-7.	Select Help -> Edit Custom VM Options and add the following line to the end of the file: `-Deditable.java.test.console=true` This is necessary to run the test driver properly.
-8.	Select File -> Invalidate Caches / Restart.
-9.	Once IntelliJ finishes restarting, you should be good to go. Good luck!
+I look very roughly 25 hours on this assignment.
+Week of 2/20/23
+Friday - some time
+Tuesday - (Monday instruction) ~ 5 hours
+Wednesday - (Snow day) ~ 4 hours
+Thursday - (skipped class ) ~ 2 hours
+Friday - ~ 2-6ish, 9:30-11ish ~ 5ish hours
